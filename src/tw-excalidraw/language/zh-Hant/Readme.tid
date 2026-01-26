@@ -1,0 +1,35 @@
+title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
+
+\procedure lingo-base() $:/plugins/itw/tw-excalidraw/language/
+
+! <<lingo Name>>
+
+<<lingo Description>>
+
+以Excalidraw為基的白板軟件。
+
+
+!! 簡單啟用
+
+`<$whiteboard-excalidraw tiddler="條目名稱" />`
+
+
+!! 組件
+
+此插件提供`<$whiteboard-excalidraw />`組件。
+
+
+!! 屬性
+
+|屬性 |描述 |類型 |預設值 |h
+|`tiddler` |白板條目之名稱 |字符串 |無 |
+|`width` |白板元素的闊度 |字符串 |`100%` |
+|`height` |白板元素的高度 |字符串 |`400px` |
+|`view-mode` |啟用`view`模式 |`yes` 或 `no`|無 |
+|`zen-mode` |啟用`zen`模式 |`yes` 或 `no`|無 |
+|`grid-mode` |啟用`grid`模式 |`yes` 或 `no`|無 |
+
+
+!! 內容類型
+
+內容類型`type`為`application/vnd.excalidraw+json`的條目將被視為白板條目。

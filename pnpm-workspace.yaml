@@ -1,0 +1,8 @@
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - dprint
+  - esbuild
+  - svelte-preprocess
+
+patchedDependencies:
+  '@excalidraw/excalidraw': patches/@excalidraw__excalidraw.patch

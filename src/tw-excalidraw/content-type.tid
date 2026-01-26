@@ -1,0 +1,5 @@
+title: $:/language/Docs/Types/application/vnd.excalidraw+json
+description: Excalidraw whiteboard
+group: Image
+group-sort: 1
+name: application/vnd.excalidraw+json

@@ -1,0 +1,33 @@
+title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
+
+\procedure lingo-base() $:/plugins/itw/tw-excalidraw/language/
+
+! <<lingo Name>>
+
+<<lingo Description>>
+
+
+!! Quick Start
+
+`<$whiteboard-excalidraw tiddler="Tiddler title" />`
+
+
+!! Widget
+
+This plugin provides the `<$whiteboard-excalidraw />` widget.
+
+
+!! Attributes
+
+|Attribute |Description |Type |Default value |h
+|`tiddler` |Title of the tiddler to store whiteboard data in |String |None |
+|`width` |Width of the whiteboard element |String |`100%` |
+|`height` |Height of the whiteboard element |String |`400px` |
+|`view-mode` |Enables `view` mode |`yes` or `no`|None |
+|`zen-mode` |Enables `zen` mode |`yes` or `no`|None |
+|`grid-mode` |Enables `grid` mode |`yes` or `no`|None |
+
+
+!! Content Type
+
+Tiddlers with a `type` of `application/vnd.excalidraw+json` will be considered a whiteboard tiddler.

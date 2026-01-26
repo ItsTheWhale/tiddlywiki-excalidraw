@@ -1,0 +1,14 @@
+diff --git a/package.json b/package.json
+index a545ed7f786331f8e07247471a3bdf602831f15f..3f626f7aed171bbd2bea9523a0ca64b258e4ef25 100644
+--- a/package.json
++++ b/package.json
+@@ -11,7 +11,8 @@
+     },
+     "./index.css": {
+       "development": "./dist/dev/index.css",
+-      "production": "./dist/prod/index.css"
++      "production": "./dist/prod/index.css",
++      "default": "./dist/prod/index.css"
+     },
+     ".": {
+       "types": "./dist/types/excalidraw/index.d.ts",

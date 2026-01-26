@@ -1,0 +1,3 @@
+title: $:/plugins/itw/tw-excalidraw/view-template-body
+
+<$whiteboard-excalidraw tiddler=<<currentTiddler>> />
