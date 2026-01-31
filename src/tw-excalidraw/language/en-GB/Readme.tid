@@ -9,12 +9,12 @@ title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
 
 !! Quick Start
 
-`<$whiteboard-excalidraw tiddler="Tiddler title" />`
+`<$excalidraw tiddler="Tiddler title" />`
 
 
 !! Widget
 
-This plugin provides the `<$whiteboard-excalidraw />` widget.
+This plugin provides the `<$excalidraw />` widget.
 
 
 !! Attributes

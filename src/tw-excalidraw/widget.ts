@@ -3,7 +3,7 @@ import { App, IProps } from './components/App';
 
 import './widget.css';
 
-class WhiteboardExcalidrawWidget extends Widget<IProps> {
+class ExcalidrawWidget extends Widget<IProps> {
   public reactComponent = App;
   public getProps = () => {
     const editTitle = this.getAttribute('tiddler');
@@ -90,6 +90,6 @@ class WhiteboardExcalidrawWidget extends Widget<IProps> {
 }
 
 declare let exports: {
-  'whiteboard-excalidraw': typeof WhiteboardExcalidrawWidget;
+  'excalidraw': typeof ExcalidrawWidget;
 };
-exports['whiteboard-excalidraw'] = WhiteboardExcalidrawWidget;
+exports['excalidraw'] = ExcalidrawWidget;

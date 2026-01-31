@@ -11,12 +11,12 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 
 !! 簡單啟用
 
-`<$whiteboard-excalidraw tiddler="條目名稱" />`
+`<$excalidraw tiddler="條目名稱" />`
 
 
 !! 組件
 
-此插件提供`<$whiteboard-excalidraw />`組件。
+此插件提供`<$excalidraw />`組件。
 
 
 !! 屬性

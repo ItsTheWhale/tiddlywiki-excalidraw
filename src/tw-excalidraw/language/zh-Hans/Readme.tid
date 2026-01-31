@@ -9,12 +9,12 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 
 !! 简单启用
 
-`<$whiteboard-excalidraw tiddler="条目名称" />`
+`<$excalidraw tiddler="条目名称" />`
 
 
 !! 组件
 
-此插件提供`<$whiteboard-excalidraw />`组件。
+此插件提供`<$excalidraw />`组件。
 
 
 !! 属性
