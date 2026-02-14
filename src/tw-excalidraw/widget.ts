@@ -90,6 +90,6 @@ class ExcalidrawWidget extends Widget<IProps> {
 }
 
 declare let exports: {
-  'excalidraw': typeof ExcalidrawWidget;
+  excalidraw: typeof ExcalidrawWidget;
 };
 exports['excalidraw'] = ExcalidrawWidget;
