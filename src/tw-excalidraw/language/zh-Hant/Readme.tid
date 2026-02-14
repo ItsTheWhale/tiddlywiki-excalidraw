@@ -6,8 +6,6 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 
 <<lingo Description>>
 
-以Excalidraw為基的白板軟件。
-
 
 !! 簡單啟用
 
@@ -16,7 +14,7 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 
 !! 組件
 
-此插件提供`<$excalidraw />`組件。
+此插件提供 `<$excalidraw />` 組件。
 
 
 !! 屬性
@@ -25,11 +23,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 |`tiddler` |白板條目之名稱 |字符串 |無 |
 |`width` |白板元素的闊度 |字符串 |`100%` |
 |`height` |白板元素的高度 |字符串 |`400px` |
-|`view-mode` |啟用`view`模式 |`yes` 或 `no`|無 |
-|`zen-mode` |啟用`zen`模式 |`yes` 或 `no`|無 |
-|`grid-mode` |啟用`grid`模式 |`yes` 或 `no`|無 |
+|`view-mode` |啟用 `view` 模式 |`yes` 或 `no`|無 |
+|`zen-mode` |啟用 `zen` 模式 |`yes` 或 `no`|無 |
+|`grid-mode` |啟用 `grid` 模式 |`yes` 或 `no`|無 |
 
 
 !! 內容類型
 
-內容類型`type`為`application/vnd.excalidraw+json`的條目將被視為白板條目。
+內容類型 `type` 為 `application/vnd.excalidraw+json` 的條目將被視為白板條目。
