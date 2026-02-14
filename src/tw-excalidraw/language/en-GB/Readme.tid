@@ -7,17 +7,22 @@ title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
 <<lingo Description>>
 
 
-!! Quick Start
+!! Creating whiteboard tiddlers
 
-`<$excalidraw tiddler="Tiddler title" />`
+New whiteboard tiddlers can be created through the page control button {{$:/plugins/itw/tw-excalidraw/ui/new-button}}. Alternatively, on an empty tiddler, set its `type` field to `application/vnd.excalidraw+json`.
 
 
 !! Widget
 
-This plugin provides the `<$excalidraw />` widget.
+This plugin provides the `<$excalidraw />` widget to display a whiteboard.
 
 
-!! Attributes
+!!! Quick Start
+
+`<$excalidraw tiddler="Tiddler title" />`
+
+
+!!! Attributes
 
 |Attribute |Description |Type |Default value |h
 |`tiddler` |Title of the tiddler to store whiteboard data in |String |None |

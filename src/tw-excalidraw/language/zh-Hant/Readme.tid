@@ -7,17 +7,20 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 <<lingo Description>>
 
 
-!! 簡單啟用
+!! 創建白板條目
 
-`<$excalidraw tiddler="條目名稱" />`
+可用工具 {{$:/plugins/itw/tw-excalidraw/ui/new-button}} 創建白板條目。也可把直接一個空的條目的 `type` 字段設為 `application/vnd.excalidraw+json`。
 
 
 !! 組件
 
-此插件提供 `<$excalidraw />` 組件。
+此插件提供 `<$excalidraw />` 組件以顯示白板。
 
+!!! 簡單啟用
 
-!! 屬性
+`<$excalidraw tiddler="條目名稱" />`
+
+!!! 屬性
 
 |屬性 |描述 |類型 |預設值 |h
 |`tiddler` |白板條目之名稱 |字符串 |無 |
