@@ -1,4 +1,4 @@
-title: $:/plugins/itw/tw-excalidraw/ui/create-button
+title: $:/plugins/itw/tw-excalidraw/ui/new-button
 tags: $:/tags/PageControls
 caption: {{$:/core/images/paint}} <<lingo NewButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
 description: <<lingo NewButtonHint $:/plugins/itw/tw-excalidraw/language/>>
