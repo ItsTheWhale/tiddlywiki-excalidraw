@@ -1,0 +1,29 @@
+title: $:/plugins/itw/tw-excalidraw/ui/create-button
+tags: $:/tags/PageControls
+caption: {{$:/core/images/paint}} <<lingo NewButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
+description: <<lingo NewButtonHint $:/plugins/itw/tw-excalidraw/language/>>
+
+\whitespace trim
+
+\procedure new-excalidraw-action()
+  <$action-sendmessage $message="tm-new-tiddler" type="application/vnd.excalidraw+json" />
+\end
+
+<$wikify name="hint" text="""<<lingo NewButtonHint $:/plugins/itw/tw-excalidraw/language/>>""">
+<$wikify name="caption" text="""<<lingo NewButtonCaption $:/plugins/itw/tw-excalidraw/language/>>""">
+<$button
+    actions=<<new-excalidraw-action>>
+    tooltip=<<hint>>
+    aria-label=<<caption>>
+    class=<<tv-config-toolbar-class>>>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/paint}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<<caption>>
+</span>
+<%endif%>
+</$button>
+</$wikify>
+</$wikify>
