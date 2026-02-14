@@ -28,6 +28,11 @@ This plugin provides the `<$excalidraw />` widget.
 |`grid-mode` |Enables `grid` mode |`yes` or `no`|None |
 
 
+!! Layout
+
+An alternative layout is provided which opens the focused tiddler in fullscreen if it is a whiteboard tiddler, or a temporary whiteboard otherwise. Switch in and out of it with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
+
+
 !! Content Type
 
 Tiddlers with a `type` of `application/vnd.excalidraw+json` will be considered a whiteboard tiddler.

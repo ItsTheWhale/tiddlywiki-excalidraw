@@ -28,6 +28,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 |`grid-mode` |啟用 `grid` 模式 |`yes` 或 `no`|無 |
 
 
+!! 佈局
+
+提供白板佈局，全屏開啟為焦點的白板條目以供編輯。若聚焦中的條目爲非白板條目，開啟臨時的白板。以快捷鍵 <code>{{$:/config/shortcuts/layout-switcher}}</code> 簡單切換。
+
+
 !! 內容類型
 
 內容類型 `type` 為 `application/vnd.excalidraw+json` 的條目將被視為白板條目。
