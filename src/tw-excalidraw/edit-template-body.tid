@@ -1,3 +1,0 @@
-title: $:/plugins/itw/tw-excalidraw/edit-template-body
-
-<$excalidraw tiddler=<<currentTiddler>> />

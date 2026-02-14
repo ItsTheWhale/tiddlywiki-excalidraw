@@ -1,5 +1,0 @@
-title: $:/plugins/itw/tw-excalidraw/edit-template-body-filter
-tags: $:/tags/EditTemplateBodyFilter
-list-before: $:/config/EditTemplateBodyFilters/default
-
-[field:type[application/vnd.excalidraw+json]then[$:/plugins/itw/tw-excalidraw/edit-template-body]]
