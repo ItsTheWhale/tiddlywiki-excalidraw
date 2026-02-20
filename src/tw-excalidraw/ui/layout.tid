@@ -18,8 +18,8 @@ tc-page-container
 	<$messagecatcher $tm-navigate=<<redirected-navigate-actions>>>
 		{{$:/core/ui/CommandPaletteTemplate}}
 		<div class=<<containerClasses>>>
-			<%if [all[current]field:type[application/vnd.excalidraw+json]] %>
-			<$excalidraw tiddler={{$:/temp/focussedtiddler}} width="100vw" height="100vh" />
+			<%if [{$:/temp/itw/tw-excalidraw/FocusedTiddler}field:type[application/vnd.excalidraw+json]] %>
+			<$excalidraw tiddler={{$:/temp/itw/tw-excalidraw/FocusedTiddler}} width="100vw" height="100vh" />
 			<%else%>
 			<$excalidraw width="100vw" height="100vh" />
 			<%endif%>

@@ -4,3 +4,5 @@ Name: Excalidraw Whiteboard
 Description: A whiteboard plugin using Excalidraw
 NewButtonCaption: new Excalidraw tiddler
 NewButtonHint: Create an Excalidraw tiddler
+OpenInLayoutButtonCaption: edit Excalidraw whiteboard
+OpenInLayoutButtonHint: Open and edit this Excalidraw whiteboard in a fullscreen layout

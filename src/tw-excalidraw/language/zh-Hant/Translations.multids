@@ -4,3 +4,5 @@ Name: Excalidraw 白板
 Description: 以 Excalidraw 為基的白板插件
 NewButtonCaption: 新增 Excalidraw 條目
 NewButtonHint: 建立一個新的 Excalidraw 條目
+OpenInLayoutButtonCaption: 編輯 Excalidraw 白板
+OpenInLayoutButtonHint: 於全屏佈局開啟并編輯 Excalidraw 白板

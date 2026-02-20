@@ -63,7 +63,7 @@ export function App(props: IProps) {
 
   return (
     <>
-      <div style={{ width, height }}>
+      <div style={{ width, height }} onFocus={onFocus}>
         <Excalidraw
           onChange={onChange}
           initialData={initialDataObject}

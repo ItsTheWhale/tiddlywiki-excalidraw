@@ -1,0 +1,31 @@
+title: $:/plugins/itw/tw-excalidraw/ui/open-in-layout-button
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/paint}} <<lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
+description: <<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>
+
+\whitespace trim
+
+\procedure open-in-layout-actions()
+<$action-setfield $tiddler="$:/temp/itw/tw-excalidraw/FocusedTiddler" text=<<currentTiddler>> />
+<$action-setfield $tiddler="$:/layout" text="$:/plugins/itw/tw-excalidraw/ui/layout" />
+\end
+
+<%if [all[current]field:type[application/vnd.excalidraw+json]] %>
+<$wikify name="hint" text="""<<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>""">
+<$wikify name="caption" text="""<<lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>""">
+<$button
+    actions=<<open-in-layout-actions>>
+    tooltip=<<hint>>
+    aria-label=<<caption>>
+    class=<<tv-config-toolbar-class>>>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+{{$:/core/images/paint}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>
+</span>
+</$button>
+</$wikify>
+</$wikify>
+<%endif%>
