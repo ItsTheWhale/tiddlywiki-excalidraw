@@ -2,6 +2,8 @@ title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
 
 \procedure lingo-base() $:/plugins/itw/tw-excalidraw/language/
 
+\procedure open-in-layout-button-icon() <$button class=<<tv-config-toolbar-class>>>{{$:/core/images/paint}}</$button>
+
 ! <<lingo Name>>
 
 <<lingo Description>>
@@ -10,6 +12,17 @@ title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
 !! Creating whiteboard tiddlers
 
 New whiteboard tiddlers can be created through the page control button {{$:/plugins/itw/tw-excalidraw/ui/new-button}}. Alternatively, on an empty tiddler, set its `type` field to `application/vnd.excalidraw+json`.
+
+
+!! Editing
+
+!!! Fullscreen layout
+
+Edit a whiteboard tiddler in a fullscreen layout using the view toolbar button <<open-in-layout-button-icon>>. Exit the layout with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
+
+!!! As a draft
+
+Whiteboard tiddlers can also be edited as a draft using the standard view toolbar edit button {{$:/core/ui/Buttons/edit}}. Changes will not be saved until you confirm them with the edit toolbar save button {{$:/core/ui/Buttons/save}}.
 
 
 !! Widget
@@ -35,7 +48,7 @@ This plugin provides the `<$excalidraw />` widget to display a whiteboard.
 
 !! Layout
 
-An alternative layout is provided which opens the focused tiddler in fullscreen if it is a whiteboard tiddler, or a temporary whiteboard otherwise. Switch in and out of it with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
+An alternative layout is provided which opens the last focused whiteboard in fullscreen, or a temporary whiteboard if there is none. It can also be opened for a specific tiddler with the view toolbar button <<open-in-layout-button-icon>>. Switch in and out of it with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
 
 
 !! Content Type

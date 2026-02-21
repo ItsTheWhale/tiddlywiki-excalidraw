@@ -2,6 +2,8 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 
 \procedure lingo-base() $:/plugins/itw/tw-excalidraw/language/
 
+\procedure open-in-layout-button-icon() <$button class=<<tv-config-toolbar-class>>>{{$:/core/images/paint}}</$button>
+
 ! <<lingo Name>>
 
 <<lingo Description>>
@@ -10,6 +12,17 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 !! 創建白板條目
 
 可用工具 {{$:/plugins/itw/tw-excalidraw/ui/new-button}} 創建白板條目。也可把直接一個空的條目的 `type` 字段設為 `application/vnd.excalidraw+json`。
+
+
+!! 編輯
+
+!!! 全屏編輯
+
+可用檢視工具 <<open-in-layout-button-icon>> 於全屏佈局編輯白板條目。以快捷鍵 <code>{{$:/config/shortcuts/layout-switcher}}</code> 返回。
+
+!!! 以草稿編輯
+
+用標準檢視工具 {{$:/core/ui/Buttons/edit}} 為草稿編輯白板條目。以工具 {{$:/core/ui/Buttons/save}} 確認儲存之前，不會存下任何更改。
 
 
 !! 組件
@@ -33,7 +46,7 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 
 !! 佈局
 
-提供白板佈局，全屏開啟為焦點的白板條目以供編輯。若聚焦中的條目爲非白板條目，開啟臨時的白板。以快捷鍵 <code>{{$:/config/shortcuts/layout-switcher}}</code> 簡單切換。
+提供白板佈局，全屏開啟最後聚焦過的白板條目以供編輯。若無，開啟臨時的白板。也可為某一特定條目以檢視工具 <<open-in-layout-button-icon>> 開啟。以快捷鍵 <code>{{$:/config/shortcuts/layout-switcher}}</code> 簡單切換。
 
 
 !! 內容類型
