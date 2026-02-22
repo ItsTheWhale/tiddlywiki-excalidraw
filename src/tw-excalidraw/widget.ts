@@ -77,7 +77,6 @@ class ExcalidrawWidget extends Widget<IProps> {
       )
     ) return false;
 
-    console.warn('Yay!');
     this.refreshSelf();
     return true;
   }
