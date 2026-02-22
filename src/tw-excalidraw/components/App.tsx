@@ -61,6 +61,10 @@ export function App(props: IProps) {
     onSave(tiddler, data);
   }
 
+  function onFocus(): void {
+    $tw.wiki.setText('$:/temp/itw/tw-excalidraw/FocusedTiddler', 'text', undefined, props.tiddler);
+  }
+
   return (
     <>
       <div style={{ width, height }} onFocus={onFocus}>
