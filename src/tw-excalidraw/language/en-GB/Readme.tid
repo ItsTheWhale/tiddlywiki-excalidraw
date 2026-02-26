@@ -18,11 +18,11 @@ New whiteboard tiddlers can be created through the page control button {{$:/plug
 
 !!! Fullscreen layout
 
-Edit a whiteboard tiddler in a fullscreen layout using the view toolbar button <<open-in-layout-button-icon>>. Exit the layout with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
+Directly edit a whiteboard tiddler in a fullscreen layout using the view toolbar button <<open-in-layout-button-icon>>. Exit the layout with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
 
 !!! As a draft
 
-Whiteboard tiddlers can also be edited as a draft using the standard view toolbar edit button {{$:/core/ui/Buttons/edit}}. Changes will not be saved until you confirm them with the edit toolbar save button {{$:/core/ui/Buttons/save}}.
+Whiteboard tiddlers can also be edited as a draft using the standard view toolbar edit button {{$:/core/ui/Buttons/edit}}. The fullscreen layout can also be used using the edit toolbar button <<open-in-layout-button-icon>>. Changes will not be saved until you confirm them with the edit toolbar save button {{$:/core/ui/Buttons/save}}.
 
 
 !! Widget

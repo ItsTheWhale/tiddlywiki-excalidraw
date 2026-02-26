@@ -18,11 +18,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 
 !!! 全屏編輯
 
-可用檢視工具 <<open-in-layout-button-icon>> 於全屏佈局編輯白板條目。以快捷鍵 <code>{{$:/config/shortcuts/layout-switcher}}</code> 返回。
+可直接用檢視工具 <<open-in-layout-button-icon>> 於全屏佈局編輯白板條目。以快捷鍵 <code>{{$:/config/shortcuts/layout-switcher}}</code> 返回。
 
 !!! 以草稿編輯
 
-用標準檢視工具 {{$:/core/ui/Buttons/edit}} 為草稿編輯白板條目。以工具 {{$:/core/ui/Buttons/save}} 確認儲存之前，不會存下任何更改。
+用標準檢視工具 {{$:/core/ui/Buttons/edit}} 為草稿編輯白板條目。也可用工具 <<open-in-layout-button-icon>> 全屏編輯。以工具 {{$:/core/ui/Buttons/save}} 確認儲存之前，不會存下任何更改。
 
 
 !! 組件
