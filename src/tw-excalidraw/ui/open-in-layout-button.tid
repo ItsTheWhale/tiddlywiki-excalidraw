@@ -1,5 +1,5 @@
 title: $:/plugins/itw/tw-excalidraw/ui/open-in-layout-button
-tags: $:/tags/ViewToolbar
+tags: $:/tags/ViewToolbar $:/tags/EditToolbar
 caption: {{$:/core/images/paint}} <<lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
 description: <<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>
 
