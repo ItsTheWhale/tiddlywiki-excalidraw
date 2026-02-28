@@ -38,8 +38,19 @@ function yesOrNo(value: string | undefined): boolean | undefined {
   return value !== 'no';
 }
 
-export function App(props: IProps) {
-  const { tiddler, initialData, langCode, width, height, viewMode, zenMode, gridMode, onSave } = props;
+export function App(props: IProps & IDefaultWidgetProps) {
+  const {
+    tiddler,
+    initialData,
+    langCode,
+    width,
+    height,
+    viewMode,
+    zenMode,
+    gridMode,
+    onSave,
+    parentWidget,
+  } = props;
 
   useEffect(() => {
     if (tiddler && !$tw.wiki.getTiddler(tiddler)) {
@@ -65,11 +76,29 @@ export function App(props: IProps) {
     $tw.wiki.setText('$:/temp/itw/tw-excalidraw/FocusedTiddler', 'text', undefined, props.tiddler);
   }
 
+  function onLinkOpen(element: NonDeleted<ExcalidrawElement>, event: Event): void {
+    const link = element.link;
+
+    if (!link) return;
+
+    // Tiddler links are surrounded by square brackets
+    // [[title]]
+    if (link.match(/(?<=^\[\[).+(?=]]$)/)) {
+      parentWidget?.dispatchEvent({
+        type: 'tm-navigate',
+        navigateTo: String(link.match(/(?<=^\[\[).+(?=]]$)/)),
+      });
+
+      event.preventDefault();
+    }
+  }
+
   return (
     <>
       <div style={{ width, height }} onFocus={onFocus}>
         <Excalidraw
           onChange={onChange}
+          onLinkOpen={onLinkOpen}
           initialData={initialDataObject}
           langCode={langCode}
           viewModeEnabled={yesOrNo(viewMode)}
