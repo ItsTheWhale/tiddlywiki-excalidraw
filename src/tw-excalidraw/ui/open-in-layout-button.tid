@@ -23,8 +23,9 @@ description: <<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/languag
 <%endif%>
 <%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
-<<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>
+<<lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
 </span>
+<%endif%>
 </$button>
 </$wikify>
 </$wikify>
