@@ -1,10 +1,13 @@
-import type { ExcalidrawElement, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
+import { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js';
+
+import type { ExcalidrawElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
 import { Excalidraw, serializeAsJSON } from '@excalidraw/excalidraw';
 import type { cleanAppStateForExport } from '@excalidraw/excalidraw/dist/types/excalidraw/appState';
-import type { AppState, BinaryFiles } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
+import type { AppState, BinaryFiles, ExcalidrawImperativeAPI } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
 import '@excalidraw/excalidraw/index.css';
-import { useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 
 export interface IProps {
   tiddler?: string;
@@ -52,6 +55,8 @@ export function App(props: IProps & IDefaultWidgetProps) {
     parentWidget,
   } = props;
 
+  const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
+
   useEffect(() => {
     if (tiddler && !$tw.wiki.getTiddler(tiddler)) {
       $tw.wiki.addTiddler({
@@ -76,6 +81,10 @@ export function App(props: IProps & IDefaultWidgetProps) {
     $tw.wiki.setText('$:/temp/itw/tw-excalidraw/FocusedTiddler', 'text', undefined, props.tiddler);
   }
 
+  function generateLinkForSelection(id: string): string {
+    return `##${id}`;
+  }
+
   function onLinkOpen(element: NonDeleted<ExcalidrawElement>, event: Event): void {
     const link = element.link;
 
@@ -90,6 +99,12 @@ export function App(props: IProps & IDefaultWidgetProps) {
       });
 
       event.preventDefault();
+    } // Element links are prefixed just like DataTiddler named properties
+    // ##element
+    else if (link.startsWith('##')) {
+      excalidrawAPI?.scrollToContent(link.replace(/^##/, ''));
+
+      event.preventDefault();
     }
   }
 
@@ -97,7 +112,9 @@ export function App(props: IProps & IDefaultWidgetProps) {
     <>
       <div style={{ width, height }} onFocus={onFocus}>
         <Excalidraw
+          excalidrawAPI={setExcalidrawAPI}
           onChange={onChange}
+          generateLinkForSelection={generateLinkForSelection}
           onLinkOpen={onLinkOpen}
           initialData={initialDataObject}
           langCode={langCode}
