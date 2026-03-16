@@ -26,6 +26,17 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 用标准检视工具 {{$:/core/ui/Buttons/edit}} 为草稿编辑白板条目。也可用工具 <<open-in-layout-button-icon>> 全屏编辑。以工具 {{$:/core/ui/Buttons/save}} 确认储存之前，不会存下任何更改。
 
 
+!! 连接
+
+!!! 连接条目
+
+用两个方括弧包围条目名称（`[[条目名称]]`）。
+
+!!! 连接元素
+
+于元素 ID 前方添上 `##`（`##元素 ID`）以制成元素连接。 也可用 Excalidraw 的自动连结生成功能生成。
+
+
 !! 组件
 
 此插件提供 `<$excalidraw />` 组件以显示白板。

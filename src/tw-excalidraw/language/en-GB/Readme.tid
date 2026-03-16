@@ -25,6 +25,17 @@ Directly edit a whiteboard tiddler in a fullscreen layout using the view toolbar
 Whiteboard tiddlers can also be edited as a draft using the standard view toolbar edit button {{$:/core/ui/Buttons/edit}}. The fullscreen layout can also be used using the edit toolbar button <<open-in-layout-button-icon>>. Changes will not be saved until you confirm them with the edit toolbar save button {{$:/core/ui/Buttons/save}}.
 
 
+!! Linking
+
+!!! To tiddlers
+
+Excalidraw elements can link to tiddlers by enclosing the title in square brackets (`[[Tiddler title]]`).
+
+!!! To other elements
+
+To link to other Excalidraw elements, prefix the element ID with `##` (`##element-id`). These links can be generated automatically using the native Excalidraw element link generator.
+
+
 !! Widget
 
 This plugin provides the `<$excalidraw />` widget to display a whiteboard.
