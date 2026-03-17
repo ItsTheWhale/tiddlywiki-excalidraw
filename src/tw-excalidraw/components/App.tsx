@@ -81,6 +81,10 @@ export function App(props: IProps & IDefaultWidgetProps) {
     $tw.wiki.setText('$:/temp/itw/tw-excalidraw/FocusedTiddler', 'text', undefined, props.tiddler);
   }
 
+  function onExitLayout(): void {
+    $tw.wiki.setText('$:/layout', 'text', undefined, '$:/core/ui/PageTemplate');
+  }
+
   function generateLinkForSelection(id: string): string {
     return `##${id}`;
   }
@@ -123,6 +127,9 @@ export function App(props: IProps & IDefaultWidgetProps) {
           gridModeEnabled={yesOrNo(gridMode)}
         >
           <MainMenu>
+            <MainMenu.Item onSelect={onExitLayout}>
+              Return to standard layout
+            </MainMenu.Item>
             <MainMenu.DefaultItems.LoadScene />
             <MainMenu.DefaultItems.SaveToActiveFile />
             <MainMenu.DefaultItems.Export />
