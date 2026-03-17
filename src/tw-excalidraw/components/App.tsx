@@ -1,7 +1,7 @@
 import { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js';
 
 import type { ExcalidrawElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
-import { Excalidraw, serializeAsJSON } from '@excalidraw/excalidraw';
+import { Excalidraw, MainMenu, serializeAsJSON } from '@excalidraw/excalidraw';
 import type { cleanAppStateForExport } from '@excalidraw/excalidraw/dist/types/excalidraw/appState';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
@@ -121,7 +121,24 @@ export function App(props: IProps & IDefaultWidgetProps) {
           viewModeEnabled={yesOrNo(viewMode)}
           zenModeEnabled={yesOrNo(zenMode)}
           gridModeEnabled={yesOrNo(gridMode)}
-        />
+        >
+          <MainMenu>
+            <MainMenu.DefaultItems.LoadScene />
+            <MainMenu.DefaultItems.SaveToActiveFile />
+            <MainMenu.DefaultItems.Export />
+            <MainMenu.DefaultItems.SaveAsImage />
+            <MainMenu.DefaultItems.SearchMenu />
+            <MainMenu.DefaultItems.Help />
+            <MainMenu.DefaultItems.ClearCanvas />
+            <MainMenu.Separator />
+            <MainMenu.Group title='Excalidraw links'>
+              <MainMenu.DefaultItems.Socials />
+            </MainMenu.Group>
+            <MainMenu.Separator />
+            <MainMenu.DefaultItems.ToggleTheme />
+            <MainMenu.DefaultItems.ChangeCanvasBackground />
+          </MainMenu>
+        </Excalidraw>
       </div>
     </>
   );
