@@ -132,7 +132,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
           >
             <MainMenu>
               <MainMenu.Item onSelect={onExitLayout} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
-                Return to standard layout
+                <Wikify text='<<lingo StandardLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
               </MainMenu.Item>
               <MainMenu.DefaultItems.LoadScene />
               <MainMenu.DefaultItems.SaveToActiveFile />

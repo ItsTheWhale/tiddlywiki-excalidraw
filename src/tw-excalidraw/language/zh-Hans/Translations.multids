@@ -6,3 +6,4 @@ NewButtonCaption: 新增 Excalidraw 条目
 NewButtonHint: 建立一个新的 Excalidraw 条目
 OpenInLayoutButtonCaption: 编辑 Excalidraw 白板
 OpenInLayoutButtonHint: 于全屏布局开启并编辑 Excalidraw 白板
+StandardLayoutButtonCaption: 返回标准布局
