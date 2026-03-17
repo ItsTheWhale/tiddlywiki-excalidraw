@@ -1,4 +1,5 @@
-import { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js';
+import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js';
+import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 
 import type { ExcalidrawElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
 import { Excalidraw, MainMenu, serializeAsJSON } from '@excalidraw/excalidraw';
@@ -8,6 +9,8 @@ import type { AppState, BinaryFiles, ExcalidrawImperativeAPI } from '@excalidraw
 import '@excalidraw/excalidraw/index.css';
 
 import { useEffect, useState } from 'react';
+
+import { Wikify } from './Wikify.js';
 
 export interface IProps {
   tiddler?: string;
@@ -115,37 +118,39 @@ export function App(props: IProps & IDefaultWidgetProps) {
   return (
     <>
       <div style={{ width, height }} onFocus={onFocus}>
-        <Excalidraw
-          excalidrawAPI={setExcalidrawAPI}
-          onChange={onChange}
-          generateLinkForSelection={generateLinkForSelection}
-          onLinkOpen={onLinkOpen}
-          initialData={initialDataObject}
-          langCode={langCode}
-          viewModeEnabled={yesOrNo(viewMode)}
-          zenModeEnabled={yesOrNo(zenMode)}
-          gridModeEnabled={yesOrNo(gridMode)}
-        >
-          <MainMenu>
-            <MainMenu.Item onSelect={onExitLayout}>
-              Return to standard layout
-            </MainMenu.Item>
-            <MainMenu.DefaultItems.LoadScene />
-            <MainMenu.DefaultItems.SaveToActiveFile />
-            <MainMenu.DefaultItems.Export />
-            <MainMenu.DefaultItems.SaveAsImage />
-            <MainMenu.DefaultItems.SearchMenu />
-            <MainMenu.DefaultItems.Help />
-            <MainMenu.DefaultItems.ClearCanvas />
-            <MainMenu.Separator />
-            <MainMenu.Group title='Excalidraw links'>
-              <MainMenu.DefaultItems.Socials />
-            </MainMenu.Group>
-            <MainMenu.Separator />
-            <MainMenu.DefaultItems.ToggleTheme />
-            <MainMenu.DefaultItems.ChangeCanvasBackground />
-          </MainMenu>
-        </Excalidraw>
+        <ParentWidgetContext.Provider value={parentWidget}>
+          <Excalidraw
+            excalidrawAPI={setExcalidrawAPI}
+            onChange={onChange}
+            generateLinkForSelection={generateLinkForSelection}
+            onLinkOpen={onLinkOpen}
+            initialData={initialDataObject}
+            langCode={langCode}
+            viewModeEnabled={yesOrNo(viewMode)}
+            zenModeEnabled={yesOrNo(zenMode)}
+            gridModeEnabled={yesOrNo(gridMode)}
+          >
+            <MainMenu>
+              <MainMenu.Item onSelect={onExitLayout} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
+                Return to standard layout
+              </MainMenu.Item>
+              <MainMenu.DefaultItems.LoadScene />
+              <MainMenu.DefaultItems.SaveToActiveFile />
+              <MainMenu.DefaultItems.Export />
+              <MainMenu.DefaultItems.SaveAsImage />
+              <MainMenu.DefaultItems.SearchMenu />
+              <MainMenu.DefaultItems.Help />
+              <MainMenu.DefaultItems.ClearCanvas />
+              <MainMenu.Separator />
+              <MainMenu.Group title='Excalidraw links'>
+                <MainMenu.DefaultItems.Socials />
+              </MainMenu.Group>
+              <MainMenu.Separator />
+              <MainMenu.DefaultItems.ToggleTheme />
+              <MainMenu.DefaultItems.ChangeCanvasBackground />
+            </MainMenu>
+          </Excalidraw>
+        </ParentWidgetContext.Provider>
       </div>
     </>
   );
