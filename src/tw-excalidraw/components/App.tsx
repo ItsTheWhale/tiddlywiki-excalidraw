@@ -133,6 +133,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
             onChange={handleChange}
             generateLinkForSelection={generateLinkForSelection}
             onLinkOpen={handleLinkOpen}
+            validateEmbeddable={true}
             initialData={initialDataObject}
             autoFocus={yesOrNo(autoFocus)}
             langCode={langCode}
