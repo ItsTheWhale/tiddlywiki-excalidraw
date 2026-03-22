@@ -8,8 +8,10 @@ import type { AppState, BinaryFiles, ExcalidrawImperativeAPI } from '@excalidraw
 
 import '@excalidraw/excalidraw/index.css';
 
+import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
+import { WebEmbed } from './WebEmbed.js';
 import { Wikify } from './Wikify.js';
 
 export interface IProps {
@@ -124,6 +126,14 @@ export function App(props: IProps & IDefaultWidgetProps) {
     }
   }
 
+  function renderEmbeddable(element: NonDeleted<ExcalidrawElement>, _: AppState): JSX.Element | null {
+    if (element.link) {
+      return <WebEmbed link={element.link} />;
+    }
+
+    return null;
+  }
+
   return (
     <>
       <div ref={containerElementReference} style={{ width, height }} onFocus={handleFocus} onWheelCapture={handleWheelCapture}>
@@ -133,6 +143,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
             onChange={handleChange}
             generateLinkForSelection={generateLinkForSelection}
             onLinkOpen={handleLinkOpen}
+            renderEmbeddable={renderEmbeddable}
             validateEmbeddable={true}
             initialData={initialDataObject}
             autoFocus={yesOrNo(autoFocus)}
