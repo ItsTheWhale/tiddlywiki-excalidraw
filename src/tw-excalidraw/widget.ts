@@ -11,12 +11,13 @@ class ExcalidrawWidget extends Widget<IProps> {
     return {
       tiddler: editTitle,
       initialData: editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : '',
+      width: this.getAttribute('width', '100%'),
+      height: this.getAttribute('height', '400px'),
+      autoFocus: this.getAttribute('autoFocus'),
       langCode: $tw.wiki.getTiddlerText('$:/language')
         ?.replace(/^\$:\/languages\//, '')
         .replace('zh-Hans', 'zh-CN')
         .replace('zh-Hant', 'zh-TW') ?? undefined,
-      width: this.getAttribute('width', '100%'),
-      height: this.getAttribute('height', '400px'),
       viewMode: this.getAttribute('view-mode'),
       zenMode: this.getAttribute('zen-mode'),
       gridMode: this.getAttribute('grid-mode'),

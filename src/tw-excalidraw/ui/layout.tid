@@ -19,9 +19,9 @@ tc-page-container
 		{{$:/core/ui/CommandPaletteTemplate}}
 		<div class=<<containerClasses>>>
 			<%if [{$:/temp/itw/tw-excalidraw/FocusedTiddler}field:type[application/vnd.excalidraw+json]] %>
-			<$excalidraw tiddler={{$:/temp/itw/tw-excalidraw/FocusedTiddler}} width="100vw" height="100vh" />
+			<$excalidraw tiddler={{$:/temp/itw/tw-excalidraw/FocusedTiddler}} width="100vw" height="100vh" autoFocus="yes" />
 			<%else%>
-			<$excalidraw width="100vw" height="100vh" />
+			<$excalidraw width="100vw" height="100vh" autoFocus="yes" />
 			<%endif%>
 		</div>
 	</$messagecatcher>

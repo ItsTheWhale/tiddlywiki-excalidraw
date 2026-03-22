@@ -8,7 +8,7 @@ import type { AppState, BinaryFiles, ExcalidrawImperativeAPI } from '@excalidraw
 
 import '@excalidraw/excalidraw/index.css';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Wikify } from './Wikify.js';
 
@@ -17,14 +17,16 @@ export interface IProps {
 
   initialData: string;
 
-  langCode?: string;
-
   width: string;
   height: string;
 
-  viewMode: string | undefined;
-  zenMode: string | undefined;
-  gridMode: string | undefined;
+  autoFocus?: string;
+
+  langCode?: string;
+
+  viewMode?: string;
+  zenMode?: string;
+  gridMode?: string;
 
   onSave: (tiddler: string | undefined, data: string) => void;
 }
@@ -48,15 +50,18 @@ export function App(props: IProps & IDefaultWidgetProps) {
   const {
     tiddler,
     initialData,
-    langCode,
     width,
     height,
+    autoFocus,
+    langCode,
     viewMode,
     zenMode,
     gridMode,
     onSave,
     parentWidget,
   } = props;
+
+  const containerElementReference = useRef<HTMLDivElement>(null);
 
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
 
@@ -82,6 +87,10 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   function handleFocus(): void {
     $tw.wiki.setText('$:/temp/itw/tw-excalidraw/FocusedTiddler', 'text', undefined, props.tiddler);
+  }
+
+  function handleWheelCapture(event: React.WheelEvent<HTMLDivElement>): void {
+    if (!containerElementReference.current?.contains(document.activeElement)) event.stopPropagation();
   }
 
   function handleExitLayout(): void {
@@ -117,7 +126,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   return (
     <>
-      <div style={{ width, height }} onFocus={handleFocus}>
+      <div ref={containerElementReference} style={{ width, height }} onFocus={handleFocus} onWheelCapture={handleWheelCapture}>
         <ParentWidgetContext.Provider value={parentWidget}>
           <Excalidraw
             excalidrawAPI={setExcalidrawAPI}
@@ -125,13 +134,14 @@ export function App(props: IProps & IDefaultWidgetProps) {
             generateLinkForSelection={generateLinkForSelection}
             onLinkOpen={handleLinkOpen}
             initialData={initialDataObject}
+            autoFocus={yesOrNo(autoFocus)}
             langCode={langCode}
             viewModeEnabled={yesOrNo(viewMode)}
             zenModeEnabled={yesOrNo(zenMode)}
             gridModeEnabled={yesOrNo(gridMode)}
           >
             <MainMenu>
-              <MainMenu.Item onSelect={onExitLayout} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
+              <MainMenu.Item onSelect={handleExitLayout} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
                 <Wikify text='<<lingo StandardLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
               </MainMenu.Item>
               <MainMenu.DefaultItems.LoadScene />
