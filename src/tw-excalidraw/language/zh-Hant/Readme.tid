@@ -50,9 +50,9 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 |`tiddler` |白板條目之名稱 |字符串 |無 |
 |`width` |白板元素的闊度 |字符串 |`100%` |
 |`height` |白板元素的高度 |字符串 |`400px` |
-|`view-mode` |啟用 `view` 模式 |`yes` 或 `no`|無 |
-|`zen-mode` |啟用 `zen` 模式 |`yes` 或 `no`|無 |
-|`grid-mode` |啟用 `grid` 模式 |`yes` 或 `no`|無 |
+|`viewMode` |啟用 `view` 模式 |`yes` 或 `no`|無 |
+|`zenMode` |啟用 `zen` 模式 |`yes` 或 `no`|無 |
+|`gridMode` |啟用 `grid` 模式 |`yes` 或 `no`|無 |
 
 
 !! 佈局

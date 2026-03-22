@@ -18,9 +18,9 @@ class ExcalidrawWidget extends Widget<IProps> {
         ?.replace(/^\$:\/languages\//, '')
         .replace('zh-Hans', 'zh-CN')
         .replace('zh-Hant', 'zh-TW') ?? undefined,
-      viewMode: this.getAttribute('view-mode'),
-      zenMode: this.getAttribute('zen-mode'),
-      gridMode: this.getAttribute('grid-mode'),
+      viewMode: this.getAttribute('viewMode'),
+      zenMode: this.getAttribute('zenMode'),
+      gridMode: this.getAttribute('gridMode'),
       onSave: this.onSave.bind(this),
     };
   };
@@ -70,11 +70,11 @@ class ExcalidrawWidget extends Widget<IProps> {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         !changedAttributes['height'] &&
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['view-mode'] &&
+        !changedAttributes['viewMode'] &&
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['zen-mode'] &&
+        !changedAttributes['zenMode'] &&
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['grid-mode']
+        !changedAttributes['gridMode']
       )
     ) return false;
 
