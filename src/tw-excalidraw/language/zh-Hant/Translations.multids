@@ -2,6 +2,7 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/
 
 Name: Excalidraw 白板
 Description: 以 Excalidraw 為基的白板插件
+ParserWarning: 此條目包含 Excalidraw 白板。不支援直接嵌入此條目，請改用組件
 NewButtonCaption: 新增 Excalidraw 條目
 NewButtonHint: 建立一個新的 Excalidraw 條目
 OpenInLayoutButtonCaption: 編輯 Excalidraw 白板
