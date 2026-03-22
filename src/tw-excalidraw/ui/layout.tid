@@ -1,6 +1,6 @@
 title: $:/plugins/itw/tw-excalidraw/ui/layout
-name: <<lingo Name $:/plugins/itw/tw-excalidraw/language/>>
-description: <<lingo Description $:/plugins/itw/tw-excalidraw/language/>>
+name: <<tw-excalidraw-lingo Name $:/plugins/itw/tw-excalidraw/language/>>
+description: <<tw-excalidraw-lingo Description $:/plugins/itw/tw-excalidraw/language/>>
 tags: $:/tags/Layout
 icon: {{$:/core/images/paint}}
 

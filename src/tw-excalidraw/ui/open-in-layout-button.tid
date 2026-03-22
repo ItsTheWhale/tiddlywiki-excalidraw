@@ -1,7 +1,7 @@
 title: $:/plugins/itw/tw-excalidraw/ui/open-in-layout-button
 tags: $:/tags/ViewToolbar $:/tags/EditToolbar
-caption: {{$:/core/images/paint}} <<lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
-description: <<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>
+caption: {{$:/core/images/paint}} <<tw-excalidraw-lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
+description: <<tw-excalidraw-lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>
 
 \whitespace trim
 
@@ -11,8 +11,8 @@ description: <<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/languag
 \end
 
 <%if [all[current]field:type[application/vnd.excalidraw+json]] %>
-<$wikify name="hint" text="""<<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>""">
-<$wikify name="caption" text="""<<lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>""">
+<$wikify name="hint" text="""<<tw-excalidraw-lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/language/>>""">
+<$wikify name="caption" text="""<<tw-excalidraw-lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>""">
 <$button
     actions=<<open-in-layout-actions>>
     tooltip=<<hint>>
@@ -23,7 +23,7 @@ description: <<lingo OpenInLayoutButtonHint $:/plugins/itw/tw-excalidraw/languag
 <%endif%>
 <%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
-<<lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
+<<tw-excalidraw-lingo OpenInLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
 </span>
 <%endif%>
 </$button>

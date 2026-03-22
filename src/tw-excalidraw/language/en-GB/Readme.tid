@@ -4,9 +4,9 @@ title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
 
 \procedure open-in-layout-button-icon() <$button class=<<tv-config-toolbar-class>>>{{$:/core/images/paint}}</$button>
 
-! <<lingo Name>>
+! <<tw-excalidraw-lingo Name>>
 
-<<lingo Description>>
+<<tw-excalidraw-lingo Description>>
 
 
 !! Creating whiteboard tiddlers
