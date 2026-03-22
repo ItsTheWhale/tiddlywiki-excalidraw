@@ -70,7 +70,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   const initialDataObject = initialData ? JSON.parse(initialData) as ImportedDataState : {};
 
-  function onChange(
+  function handleChange(
     excalidrawElements: readonly OrderedExcalidrawElement[],
     appState: AppState,
     binaryFiles: BinaryFiles,
@@ -80,11 +80,11 @@ export function App(props: IProps & IDefaultWidgetProps) {
     onSave(tiddler, data);
   }
 
-  function onFocus(): void {
+  function handleFocus(): void {
     $tw.wiki.setText('$:/temp/itw/tw-excalidraw/FocusedTiddler', 'text', undefined, props.tiddler);
   }
 
-  function onExitLayout(): void {
+  function handleExitLayout(): void {
     $tw.wiki.setText('$:/layout', 'text', undefined, '$:/core/ui/PageTemplate');
   }
 
@@ -92,7 +92,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
     return `##${id}`;
   }
 
-  function onLinkOpen(element: NonDeleted<ExcalidrawElement>, event: Event): void {
+  function handleLinkOpen(element: NonDeleted<ExcalidrawElement>, event: Event): void {
     const link = element.link;
 
     if (!link) return;
@@ -117,13 +117,13 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   return (
     <>
-      <div style={{ width, height }} onFocus={onFocus}>
+      <div style={{ width, height }} onFocus={handleFocus}>
         <ParentWidgetContext.Provider value={parentWidget}>
           <Excalidraw
             excalidrawAPI={setExcalidrawAPI}
-            onChange={onChange}
+            onChange={handleChange}
             generateLinkForSelection={generateLinkForSelection}
-            onLinkOpen={onLinkOpen}
+            onLinkOpen={handleLinkOpen}
             initialData={initialDataObject}
             langCode={langCode}
             viewModeEnabled={yesOrNo(viewMode)}
