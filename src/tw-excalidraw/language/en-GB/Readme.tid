@@ -52,6 +52,7 @@ This plugin provides the `<$excalidraw />` widget to display a whiteboard.
 |`tiddler` |Title of the tiddler to store whiteboard data in |String |None |
 |`width` |Width of the whiteboard element |String |`100%` |
 |`height` |Height of the whiteboard element |String |`400px` |
+|`autoFocus` |Automatically focus the widget on load |`yes` or `no`|None |
 |`viewMode` |Enables `view` mode |`yes` or `no`|None |
 |`zenMode` |Enables `zen` mode |`yes` or `no`|None |
 |`gridMode` |Enables `grid` mode |`yes` or `no`|None |
