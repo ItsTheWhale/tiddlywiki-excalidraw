@@ -11,6 +11,7 @@ import '@excalidraw/excalidraw/index.css';
 import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
+import { TiddlerEmbed } from './TiddlerEmbed.js';
 import { WebEmbed } from './WebEmbed.js';
 import { Wikify } from './Wikify.js';
 
@@ -103,35 +104,64 @@ export function App(props: IProps & IDefaultWidgetProps) {
     return `##${id}`;
   }
 
+  function matchTiddlerLink(link: string): string | undefined {
+    // Tiddler links are surrounded by square brackets
+    // [[title]]
+    return link.match(/^\[\[(.+)\]\]$/)?.[1];
+  }
+
+  function matchTiddlerTransclusion(link: string): string | undefined {
+    // Tiddler transclusions are surrounded by curly brackets
+    // {{title}}
+    return link.match(/^{{(.+)}}$/)?.[1];
+  }
+
+  function matchElementLink(link: string): string | undefined {
+    // Element links are prefixed just like DataTiddler named properties
+    // ##element
+    return link.match(/^##(.+)$/)?.[1];
+  }
+
   function handleLinkOpen(element: NonDeleted<ExcalidrawElement>, event: Event): void {
     const link = element.link;
 
     if (!link) return;
 
-    // Tiddler links are surrounded by square brackets
-    // [[title]]
-    if (link.match(/(?<=^\[\[).+(?=]]$)/)) {
+    const tiddlerLink = matchTiddlerLink(link);
+    const tiddlerTransclusion = matchTiddlerTransclusion(link);
+    const elementLink = matchElementLink(link);
+
+    if (tiddlerLink) {
       parentWidget?.dispatchEvent({
         type: 'tm-navigate',
-        navigateTo: String(link.match(/(?<=^\[\[).+(?=]]$)/)),
+        navigateTo: tiddlerLink,
       });
 
       event.preventDefault();
-    } // Element links are prefixed just like DataTiddler named properties
-    // ##element
-    else if (link.startsWith('##')) {
-      excalidrawAPI?.scrollToContent(link.replace(/^##/, ''));
+    } else if (tiddlerTransclusion) {
+      parentWidget?.dispatchEvent({
+        type: 'tm-navigate',
+        navigateTo: tiddlerTransclusion,
+      });
+
+      event.preventDefault();
+    } else if (elementLink) {
+      excalidrawAPI?.scrollToContent(elementLink);
 
       event.preventDefault();
     }
   }
 
   function renderEmbeddable(element: NonDeleted<ExcalidrawElement>, _: AppState): JSX.Element | null {
-    if (element.link) {
-      return <WebEmbed link={element.link} />;
-    }
+    const link = element.link;
 
-    return null;
+    if (!link) return null;
+
+    const transcludedTiddler = matchTiddlerTransclusion(element.link);
+
+    if (transcludedTiddler) return <TiddlerEmbed title={transcludedTiddler} />;
+
+    return <WebEmbed link={element.link} />;
   }
 
   return (
