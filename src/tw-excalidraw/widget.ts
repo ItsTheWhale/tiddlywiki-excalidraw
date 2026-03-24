@@ -86,6 +86,8 @@ class ExcalidrawWidget extends Widget<IProps> {
     super.destroy();
     this.root = undefined;
     super.refreshSelf();
+
+    this.lastModified = new Date().getTime();
   }
 }
 
