@@ -72,7 +72,7 @@ class ExcalidrawWidget extends Widget<IProps> {
         // Another instance did not modify the tiddler
         ($tw.wiki.getTiddler(tiddler)?.fields.modified?.getTime() ?? -Infinity) <= this.lastModified &&
         // Attributes did not change
-        $tw.utils.count(changedAttributes) === 0
+        Object.keys(changedAttributes).length === 0
       )
     ) return false;
 
