@@ -25,12 +25,21 @@ class ExcalidrawWidget extends Widget<IProps> {
     };
   };
 
-  private lastModified = new Date().getTime();
+  private isRefresh: boolean = false;
+  private lastModified: number = new Date().getTime();
 
   private onSave(tiddlerTitle: string | undefined, data: string): void {
     if (!tiddlerTitle) return;
 
     const tiddler = $tw.wiki.getTiddler(tiddlerTitle);
+    const modified = tiddler?.fields.modified?.getTime() ?? -Infinity;
+
+    // As Excalidraw fires an onSave event on unmount, prevent infinite saving loops if this widget is not newly constructed
+    if (this.isRefresh) {
+      this.lastModified = modified;
+      this.isRefresh = false;
+      return;
+    }
 
     if (
       // We created the tiddler already, so if it does not exist, it must be deleted
@@ -38,7 +47,7 @@ class ExcalidrawWidget extends Widget<IProps> {
       // If the update is unnecessary
       tiddler.fields.text === data ||
       // If another instance modified the tiddler
-      (tiddler.fields.modified?.getTime() ?? -Infinity) > this.lastModified
+      modified > this.lastModified
     ) return;
 
     $tw.wiki.setText(tiddlerTitle, 'text', undefined, data);
@@ -77,7 +86,8 @@ class ExcalidrawWidget extends Widget<IProps> {
     this.root = undefined;
     super.refreshSelf();
 
-    this.lastModified = new Date().getTime();
+    // Here we set isRefresh to true to signal that this is not a newly constructed widget
+    this.isRefresh = true;
   }
 }
 
