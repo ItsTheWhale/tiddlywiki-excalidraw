@@ -63,22 +63,12 @@ class ExcalidrawWidget extends Widget<IProps> {
         // Another instance did not modify the tiddler
         ($tw.wiki.getTiddler(tiddler)?.fields.modified?.getTime() ?? -Infinity) <= this.lastModified &&
         // Attributes did not change
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['tiddler'] &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['width'] &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['height'] &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['viewMode'] &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['zenMode'] &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedAttributes['gridMode']
+        $tw.utils.count(changedAttributes) === 0
       )
     ) return false;
 
     this.refreshSelf();
+
     return true;
   }
 
