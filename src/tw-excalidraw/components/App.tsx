@@ -4,7 +4,7 @@ import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 import type { ExcalidrawElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
 import { Excalidraw, MainMenu, serializeAsJSON } from '@excalidraw/excalidraw';
 import type { cleanAppStateForExport } from '@excalidraw/excalidraw/dist/types/excalidraw/appState';
-import type { AppState, BinaryFiles, ExcalidrawImperativeAPI } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
+import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
 import '@excalidraw/excalidraw/index.css';
 
@@ -22,6 +22,8 @@ export interface IProps {
 
   width: string;
   height: string;
+
+  scrollToContent: string;
 
   autoFocus?: string;
 
@@ -55,6 +57,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
     initialData,
     width,
     height,
+    scrollToContent,
     autoFocus,
     langCode,
     viewMode,
@@ -76,7 +79,10 @@ export function App(props: IProps & IDefaultWidgetProps) {
     }
   });
 
-  const initialDataObject = initialData ? JSON.parse(initialData) as ImportedDataState : {};
+  const initialDataObject: ExcalidrawInitialDataState = {
+    ...(initialData ? JSON.parse(initialData) : {}),
+    scrollToContent: yesOrNo(scrollToContent)
+  };
 
   function handleChange(
     excalidrawElements: readonly OrderedExcalidrawElement[],

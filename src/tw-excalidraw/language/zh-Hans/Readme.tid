@@ -51,6 +51,7 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 |`tiddler` |白板条目之名称 |字符串 |无 |
 |`width` |白板元素的阔度 |字符串 |`100%` |
 |`height` |白板元素的高度 |字符串 |`400px` |
+|`scrollToContent` |载入组件时自动导向最近的元素 |`yes` or `no`|`yes` |
 |`autoFocus` |载入组件时自动聚焦组件 |`yes` 或 `no`|无 |
 |`viewMode` |启用 `view` 模式 |`yes` 或 `no`|无 |
 |`zenMode` |启用 `zen` 模式 |`yes` 或 `no`|无 |

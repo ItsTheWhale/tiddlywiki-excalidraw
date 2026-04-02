@@ -13,6 +13,7 @@ class ExcalidrawWidget extends Widget<IProps> {
       initialData: editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : '',
       width: this.getAttribute('width', '100%'),
       height: this.getAttribute('height', '400px'),
+      scrollToContent: this.getAttribute('scrollToContent', 'yes'),
       autoFocus: this.getAttribute('autoFocus'),
       langCode: $tw.wiki.getTiddlerText('$:/language')
         ?.replace(/^\$:\/languages\//, '')
