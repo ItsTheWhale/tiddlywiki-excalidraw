@@ -68,3 +68,11 @@ An alternative layout is provided which opens the last focused whiteboard in ful
 !! Content Type
 
 Tiddlers with a `type` of `application/vnd.excalidraw+json` will be considered a whiteboard tiddler.
+
+
+!! Installation
+
+Drag and drop the plugin and its dependencies:
+
+* [[$:/plugins/itw/tw-excalidraw]]
+* [[$:/plugins/linonetwo/tw-react]]

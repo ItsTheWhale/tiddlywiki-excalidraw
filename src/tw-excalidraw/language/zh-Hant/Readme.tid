@@ -66,3 +66,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 !! 內容類型
 
 內容類型 `type` 為 `application/vnd.excalidraw+json` 的條目將被視為白板條目。
+
+
+!! 安装
+
+請把此插件及其前置插件拖放至您的維基：
+
+* [[$:/plugins/itw/tw-excalidraw]]
+* [[$:/plugins/linonetwo/tw-react]]
