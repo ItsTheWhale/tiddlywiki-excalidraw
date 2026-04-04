@@ -3,6 +3,9 @@ import { App, IProps } from './components/App';
 
 import './widget.css';
 
+// TODO: Excalidraw v0.18.0 does not correctly respect this. A pnpm patch is used as a temporary measure. Fix awaits next release https://github.com/excalidraw/excalidraw/pull/9525
+window.EXCALIDRAW_EXPORT_SOURCE = 'tw-excalidraw';
+
 class ExcalidrawWidget extends Widget<IProps> {
   public reactComponent = App;
   public getProps = () => {
