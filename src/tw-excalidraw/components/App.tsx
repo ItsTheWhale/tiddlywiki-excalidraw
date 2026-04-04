@@ -20,6 +20,8 @@ export interface IProps {
 
   initialData: string;
 
+  elementId?: string;
+
   width: string;
   height: string;
 
@@ -55,6 +57,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
   const {
     tiddler,
     initialData,
+    elementId,
     width,
     height,
     scrollToContent,
@@ -70,6 +73,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
   const containerElementReference = useRef<HTMLDivElement>(null);
 
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
+  const [isInitialLoad, setIsInitialLoad] = useState<boolean>(false);
 
   useEffect(() => {
     if (tiddler && !$tw.wiki.getTiddler(tiddler)) {
@@ -78,6 +82,13 @@ export function App(props: IProps & IDefaultWidgetProps) {
       });
     }
   }, [tiddler]);
+
+  useEffect(() => {
+    excalidrawAPI?.scrollToContent(elementId, {
+      fitToContent: true,
+      animate: false,
+    });
+  }, [excalidrawAPI, elementId]);
 
   const initialDataObject: ExcalidrawInitialDataState = {
     ...(initialData ? JSON.parse(initialData) : {}),
@@ -89,6 +100,18 @@ export function App(props: IProps & IDefaultWidgetProps) {
     appState: AppState,
     binaryFiles: BinaryFiles,
   ): void {
+    // This is an awful idea, but there is no other option
+    if (!isInitialLoad && excalidrawAPI) {
+      setIsInitialLoad(true);
+
+      if (elementId) {
+        excalidrawAPI.scrollToContent(elementId, {
+          fitToContent: true,
+          animate: false,
+        });
+      }
+    }
+
     const data = serializeAsJSON(excalidrawElements, appState, binaryFiles, 'local');
 
     onSave(tiddler, data);

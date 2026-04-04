@@ -50,6 +50,7 @@ This plugin provides the `<$excalidraw />` widget to display a whiteboard.
 
 |Attribute |Description |Type |Default value |h
 |`tiddler` |Title of the tiddler to store whiteboard data in |String |None |
+|`elementId` |ID of the element to automatically scroll to |String |None |
 |`width` |Width of the whiteboard element |String |`100%` |
 |`height` |Height of the whiteboard element |String |`400px` |
 |`scrollToContent` |Automatically scroll to the nearest element |`yes` or `no`|`yes` |
