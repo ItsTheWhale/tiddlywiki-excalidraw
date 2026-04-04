@@ -10,7 +10,7 @@ class ExcalidrawWidget extends Widget<IProps> {
 
     return {
       tiddler: editTitle,
-      initialData: editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : '',
+      initialDataText: editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : '',
       elementId: this.getAttribute('elementId'),
       width: this.getAttribute('width', '100%'),
       height: this.getAttribute('height', '400px'),

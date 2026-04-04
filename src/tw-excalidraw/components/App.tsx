@@ -2,8 +2,7 @@ import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js
 import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 
 import type { ExcalidrawElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
-import { Excalidraw, MainMenu, serializeAsJSON } from '@excalidraw/excalidraw';
-import type { cleanAppStateForExport } from '@excalidraw/excalidraw/dist/types/excalidraw/appState';
+import { Excalidraw, MainMenu, restoreAppState, restoreElements, serializeAsJSON } from '@excalidraw/excalidraw';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
 import '@excalidraw/excalidraw/index.css';
@@ -18,7 +17,7 @@ import { Wikify } from './Wikify.js';
 export interface IProps {
   tiddler?: string;
 
-  initialData: string;
+  initialDataText?: string;
 
   elementId?: string;
 
@@ -38,14 +37,7 @@ export interface IProps {
   onSave: (tiddler: string | undefined, data: string) => void;
 }
 
-interface ImportedDataState {
-  type: string;
-  version: number;
-  source: string;
-  elements: readonly ExcalidrawElement[];
-  appState: ReturnType<typeof cleanAppStateForExport>;
-  files: BinaryFiles | undefined;
-}
+type RestoredAppState = ReturnType<typeof restoreAppState>;
 
 function yesOrNo(value: string | undefined): boolean | undefined {
   if (value === undefined) return undefined;
@@ -56,7 +48,7 @@ function yesOrNo(value: string | undefined): boolean | undefined {
 export function App(props: IProps & IDefaultWidgetProps) {
   const {
     tiddler,
-    initialData,
+    initialDataText,
     elementId,
     width,
     height,
@@ -90,9 +82,31 @@ export function App(props: IProps & IDefaultWidgetProps) {
     });
   }, [excalidrawAPI, elementId]);
 
+  let initialData: {
+    elements: readonly OrderedExcalidrawElement[];
+    appState: RestoredAppState;
+    files: BinaryFiles;
+  } | undefined = undefined;
+
+  if (initialDataText) {
+    const data = JSON.parse(initialDataText) as {
+      elements: readonly ExcalidrawElement[];
+      appState: Partial<AppState>;
+      files: BinaryFiles;
+    };
+
+    initialData = {
+      elements: restoreElements(data.elements, undefined, {
+        repairBindings: true,
+      }),
+      appState: restoreAppState(data.appState, undefined),
+      files: data.files,
+    };
+  }
+
   const initialDataObject: ExcalidrawInitialDataState = {
-    ...(initialData ? JSON.parse(initialData) : {}),
-    scrollToContent: yesOrNo(scrollToContent)
+    ...initialData,
+    scrollToContent: yesOrNo(scrollToContent),
   };
 
   function handleChange(
