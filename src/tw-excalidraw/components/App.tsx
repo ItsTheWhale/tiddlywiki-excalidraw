@@ -77,7 +77,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
         title: tiddler,
       });
     }
-  });
+  }, [tiddler]);
 
   const initialDataObject: ExcalidrawInitialDataState = {
     ...(initialData ? JSON.parse(initialData) : {}),
