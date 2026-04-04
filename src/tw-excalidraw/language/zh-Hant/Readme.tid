@@ -51,11 +51,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 |`elementId` |載入組件時自動導向 ID 爲此的元素 |字符串 |無 |
 |`width` |白板元素的闊度 |字符串 |`100%` |
 |`height` |白板元素的高度 |字符串 |`400px` |
-|`scrollToContent` |載入組件時自動導向最近的元素 |`yes` 或 `no`|`yes` |
-|`autoFocus` |載入組件時自動聚焦組件 |`yes` 或 `no`|無 |
-|`viewMode` |啟用 `view` 模式 |`yes` 或 `no`|無 |
-|`zenMode` |啟用 `zen` 模式 |`yes` 或 `no`|無 |
-|`gridMode` |啟用 `grid` 模式 |`yes` 或 `no`|無 |
+|`scrollToContent` |載入組件時自動導向最近的元素 |`yes` 或 `no` |`yes` |
+|`autoFocus` |載入組件時自動聚焦組件 |`yes` 或 `no` |無 |
+|`viewMode` |啟用 `view` 模式 |`yes` 或 `no` |無 |
+|`zenMode` |啟用 `zen` 模式 |`yes` 或 `no` |無 |
+|`gridMode` |啟用 `grid` 模式 |`yes` 或 `no` |無 |
 
 
 !! 佈局
