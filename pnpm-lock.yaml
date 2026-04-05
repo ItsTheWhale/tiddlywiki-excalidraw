@@ -22,6 +22,9 @@ importers:
       npm-check-updates:
         specifier: ^19.2.0
         version: 19.2.0
+      position-observer:
+        specifier: ^1.0.3
+        version: 1.0.3
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -935,6 +938,11 @@ packages:
 
   '@radix-ui/rect@1.1.0':
     resolution: {integrity: sha512-A9+lCBZoaMJlVKcRBz2YByCG+Cp2t6nAnMnNba+XiWxnj6r4JUFqfsgwocMBZU9LPtdxC6wB56ySYpc7LQIoJg==}
+
+  '@rollup/rollup-linux-x64-gnu@4.60.1':
+    resolution: {integrity: sha512-77PpsFQUCOiZR9+LQEFg9GClyfkNXj1MP6wRnzYs0EeWbPcHs02AXu4xuUbM1zhwn3wqaizle3AEYg5aeoohhg==}
+    cpu: [x64]
+    os: [linux]
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -3270,6 +3278,9 @@ packages:
   points-on-path@0.2.1:
     resolution: {integrity: sha512-25ClnWWuw7JbWZcgqY/gJ4FQWadKxGWk+3kR/7kD0tCaDtPPMj7oHu2ToLaVhfpnHrZzYby2w6tUA0eOIuUg8g==}
 
+  position-observer@1.0.3:
+    resolution: {integrity: sha512-iqzsYcYB7wo9kd3Juw4XaVPhlLCfKhZLv6TrH096reU6tIcXuftPkA41+nqQgnPGzVo5zTC4tJ7GnIRTxrnZbQ==}
+
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
@@ -4905,6 +4916,9 @@ snapshots:
       '@types/react': 19.2.7
 
   '@radix-ui/rect@1.1.0': {}
+
+  '@rollup/rollup-linux-x64-gnu@4.60.1':
+    optional: true
 
   '@rtsao/scc@1.1.0': {}
 
@@ -7618,6 +7632,10 @@ snapshots:
     dependencies:
       path-data-parser: 0.1.0
       points-on-curve: 0.2.0
+
+  position-observer@1.0.3:
+    optionalDependencies:
+      '@rollup/rollup-linux-x64-gnu': 4.60.1
 
   possible-typed-array-names@1.1.0: {}
 

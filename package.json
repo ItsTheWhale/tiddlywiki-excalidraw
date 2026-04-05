@@ -58,6 +58,7 @@
     "@excalidraw/element": "0.18.0-f0063e113",
     "@excalidraw/excalidraw": "^0.18.0",
     "npm-check-updates": "^19.2.0",
+    "position-observer": "^1.0.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "tiddlywiki": "^5.3.8",

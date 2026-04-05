@@ -7,6 +7,8 @@ import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialD
 
 import '@excalidraw/excalidraw/index.css';
 
+import { PositionObserver } from 'position-observer';
+
 import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -81,6 +83,21 @@ export function App(props: IProps & IDefaultWidgetProps) {
       animate: false,
     });
   }, [excalidrawAPI, elementId]);
+
+  // Recompute offsets after every position change
+  useEffect(() => {
+    if (!containerElementReference.current) return;
+
+    const observer = new PositionObserver(() => {
+      excalidrawAPI?.refresh();
+    });
+
+    observer.observe(containerElementReference.current);
+
+    return () => {
+      if (containerElementReference.current) observer.unobserve(containerElementReference.current);
+    };
+  }, [containerElementReference, excalidrawAPI]);
 
   let initialData: {
     elements: readonly OrderedExcalidrawElement[];
