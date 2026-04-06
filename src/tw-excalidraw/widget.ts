@@ -65,8 +65,14 @@ class ExcalidrawWidget extends Widget<IProps> {
   }
 
   refresh(): boolean {
-    const tiddler = this.getAttribute('tiddler');
+    const tiddlerName = this.getAttribute('tiddler');
     const changedAttributes = this.computeAttributes();
+
+    // Do not refresh if no tiddler
+    if (!tiddlerName) return false;
+
+    const tiddler = $tw.wiki.getTiddler(tiddlerName);
+    const modified = tiddler?.fields.modified?.getTime() ?? -Infinity;
 
     // Do not refresh if:
     if (
@@ -75,11 +81,13 @@ class ExcalidrawWidget extends Widget<IProps> {
       // If tiddler:
       (
         // Another instance did not modify the tiddler
-        ($tw.wiki.getTiddler(tiddler)?.fields.modified?.getTime() ?? -Infinity) <= this.lastModified &&
+        modified <= this.lastModified &&
         // Attributes did not change
         Object.keys(changedAttributes).length === 0
       )
     ) return false;
+
+    this.lastModified = modified;
 
     this.refreshSelf();
 
