@@ -29,7 +29,7 @@ $:/language/
 
 			<!-- If that didn't work, try the new <lingo-base><langcode>/<title> format -->
 
-			<$let language-code={{{  [[$:/language]get[text]get[name]else[en-GB]] }}}>
+			<$let raw-language-code={{{ [[$:/language]get[text]get[name]] }}} language-code={{{ [<raw-language-code>match[en-GB]] ~[<raw-language-code>match[zh-Hant]] ~[<raw-language-code>match[zh-Hans]] ~[[en-GB]] }}}>
 
         <$transclude $tiddler={{{ [<active-lingo-base>addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>/>
 
