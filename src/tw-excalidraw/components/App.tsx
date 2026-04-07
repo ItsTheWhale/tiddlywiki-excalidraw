@@ -13,9 +13,9 @@ import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import { MainMenuItemEmbedTiddler } from './MainMenuItemEmbedTiddler.js';
+import { MainMenuItemExitLayout } from './MainMenuItemExitLayout.js';
 import { TiddlerEmbed } from './TiddlerEmbed.js';
 import { WebEmbed } from './WebEmbed.js';
-import { Wikify } from './Wikify.js';
 
 export interface IProps {
   tiddler?: string;
@@ -295,9 +295,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
             gridModeEnabled={yesOrNo(gridMode)}
           >
             <MainMenu>
-              <MainMenu.Item onSelect={handleExitLayout} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
-                <Wikify text='<<tw-excalidraw-lingo StandardLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
-              </MainMenu.Item>
+              <MainMenuItemExitLayout onSelect={handleExitLayout} />
               <MainMenuItemEmbedTiddler excalidrawAPI={excalidrawAPI} onSelect={handleEmbedTiddler} />
               <MainMenu.Separator />
               <MainMenu.DefaultItems.LoadScene />
