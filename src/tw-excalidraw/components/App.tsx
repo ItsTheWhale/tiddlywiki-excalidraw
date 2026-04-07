@@ -12,6 +12,7 @@ import { PositionObserver } from 'position-observer';
 import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
+import { MainMenuItemEmbedTiddler } from './MainMenuItemEmbedTiddler.js';
 import { TiddlerEmbed } from './TiddlerEmbed.js';
 import { WebEmbed } from './WebEmbed.js';
 import { Wikify } from './Wikify.js';
@@ -297,9 +298,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
               <MainMenu.Item onSelect={handleExitLayout} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
                 <Wikify text='<<tw-excalidraw-lingo StandardLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
               </MainMenu.Item>
-              <MainMenu.Item onSelect={handleEmbedTiddler} icon={<Wikify text='{{$:/core/images/transcludify}}' />}>
-                <Wikify text='<<tw-excalidraw-lingo EmbedTiddlerButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
-              </MainMenu.Item>
+              <MainMenuItemEmbedTiddler excalidrawAPI={excalidrawAPI} onSelect={handleEmbedTiddler} />
               <MainMenu.Separator />
               <MainMenu.DefaultItems.LoadScene />
               <MainMenu.DefaultItems.SaveToActiveFile />
