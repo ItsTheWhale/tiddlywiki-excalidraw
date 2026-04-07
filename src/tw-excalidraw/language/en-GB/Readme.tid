@@ -2,7 +2,7 @@ title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
 
 \procedure lingo-base() $:/plugins/itw/tw-excalidraw/language/
 
-\procedure open-in-layout-button-icon() <$button class=<<tv-config-toolbar-class>>>{{$:/core/images/paint}}</$button>
+\procedure button-icon(tiddler) <$button class=<<tv-config-toolbar-class>>><$transclude $tiddler=<<tiddler>> /></$button>
 
 ! <<tw-excalidraw-lingo Name>>
 
@@ -18,11 +18,11 @@ New whiteboard tiddlers can be created through the page control button {{$:/plug
 
 !!! Fullscreen layout
 
-Directly edit a whiteboard tiddler in a fullscreen layout using the view toolbar button <<open-in-layout-button-icon>>. Exit the layout with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
+Directly edit a whiteboard tiddler in a fullscreen layout using the view toolbar button <<button-icon $:/core/images/paint>>. Exit the layout with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
 
 !!! As a draft
 
-Whiteboard tiddlers can also be edited as a draft using the standard view toolbar edit button {{$:/core/ui/Buttons/edit}}. The fullscreen layout can also be used using the edit toolbar button <<open-in-layout-button-icon>>. Changes will not be saved until you confirm them with the edit toolbar save button {{$:/core/ui/Buttons/save}}.
+Whiteboard tiddlers can also be edited as a draft using the standard view toolbar edit button {{$:/core/ui/Buttons/edit}}. The fullscreen layout can also be used using the edit toolbar button <<button-icon $:/core/images/paint>>. Changes will not be saved until you confirm them with the edit toolbar save button {{$:/core/ui/Buttons/save}}.
 
 
 !! Linking
@@ -34,6 +34,11 @@ Excalidraw elements can link to tiddlers by enclosing the title in square bracke
 !!! To other elements
 
 To link to other Excalidraw elements, prefix the element ID with `##` (`##element-id`). These links can be generated automatically using the native Excalidraw element link generator.
+
+
+!! Embedding tiddlers
+
+Set the link of a Excalidraw web embed element to the tiddler title enclosed in curly braces (`{{Tiddler title}}`). The <<button-icon $:/core/images/transcludify>> button will also open the Advanced Search in a modal and automatically insert all clicked tiddlers as embeds.
 
 
 !! Widget
@@ -62,7 +67,7 @@ This plugin provides the `<$excalidraw />` widget to display a whiteboard.
 
 !! Layout
 
-An alternative layout is provided which opens the last focused whiteboard in fullscreen, or a temporary whiteboard if there is none. It can also be opened for a specific tiddler with the view toolbar button <<open-in-layout-button-icon>>. Switch in and out of it with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
+An alternative layout is provided which opens the last focused whiteboard in fullscreen, or a temporary whiteboard if there is none. It can also be opened for a specific tiddler with the view toolbar button <<button-icon $:/core/images/paint>>. Switch in and out of it with the keyboard shortcut <code>{{$:/config/shortcuts/layout-switcher}}</code>.
 
 
 !! Content Type

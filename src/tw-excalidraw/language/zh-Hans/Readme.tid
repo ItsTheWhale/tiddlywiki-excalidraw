@@ -37,6 +37,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 于元素 ID 前方添上 `##`（`##元素 ID`）以制成元素连接。 也可用 Excalidraw 的自动连结生成功能生成。
 
 
+!! 嵌入条目
+
+当链结把用双花括弧包围的条目名称（`{{条目名称}}`）设入 Excalidraw 网站嵌入元素。 可使用 <<button-icon $:/core/images/transcludify>> 工具打开 Advanced Search 搜寻并为点击过的条目自动生成嵌入元素。
+
+
 !! 组件
 
 此插件提供 `<$excalidraw />` 组件以显示白板。

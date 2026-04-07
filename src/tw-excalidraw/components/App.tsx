@@ -1,7 +1,7 @@
 import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js';
 import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 
-import type { ExcalidrawElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
+import type { ExcalidrawElement, ExcalidrawEmbeddableElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
 import { Excalidraw, MainMenu, restoreAppState, restoreElements, serializeAsJSON } from '@excalidraw/excalidraw';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
@@ -68,6 +68,47 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
   const [isInitialLoad, setIsInitialLoad] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!excalidrawAPI) return;
+
+    function handler(event: {
+      param?: string;
+      paramObject?: Record<string, unknown>;
+    }): boolean {
+      if (!excalidrawAPI) return true;
+
+      const eventTiddler = event.paramObject?.tiddler;
+
+      if (!eventTiddler || typeof eventTiddler !== 'string' || eventTiddler !== tiddler || !event.param) return true;
+
+      const appState = excalidrawAPI.getAppState();
+
+      const embed = restoreElements([{
+        type: 'embeddable',
+        x: appState.scrollX,
+        y: appState.scrollY,
+        width: 560,
+        height: 315,
+        link: `{{${event.param}}}`,
+        roundness: {
+          type: 3,
+        },
+      } as unknown as ExcalidrawEmbeddableElement], undefined);
+
+      excalidrawAPI.updateScene({
+        elements: [...excalidrawAPI.getSceneElements(), ...embed],
+      });
+
+      return false;
+    }
+
+    $tw.rootWidget.addEventListener('tw-excalidraw-search', handler);
+
+    return () => {
+      $tw.rootWidget.removeEventListener('tw-excalidraw-search', handler);
+    };
+  }, [excalidrawAPI]);
 
   useEffect(() => {
     if (tiddler && !$tw.wiki.getTiddler(tiddler)) {
@@ -160,6 +201,16 @@ export function App(props: IProps & IDefaultWidgetProps) {
     $tw.wiki.setText('$:/layout', 'text', undefined, '$:/core/ui/PageTemplate');
   }
 
+  function handleEmbedTiddler(): void {
+    props.parentWidget?.dispatchEvent({
+      type: 'tm-modal',
+      param: '$:/plugins/itw/tw-excalidraw/ui/search-modal',
+      paramObject: {
+        tiddler,
+      },
+    });
+  }
+
   function generateLinkForSelection(id: string): string {
     return `##${id}`;
   }
@@ -246,6 +297,10 @@ export function App(props: IProps & IDefaultWidgetProps) {
               <MainMenu.Item onSelect={handleExitLayout} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
                 <Wikify text='<<tw-excalidraw-lingo StandardLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
               </MainMenu.Item>
+              <MainMenu.Item onSelect={handleEmbedTiddler} icon={<Wikify text='{{$:/core/images/transcludify}}' />}>
+                <Wikify text='<<tw-excalidraw-lingo EmbedTiddlerButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
+              </MainMenu.Item>
+              <MainMenu.Separator />
               <MainMenu.DefaultItems.LoadScene />
               <MainMenu.DefaultItems.SaveToActiveFile />
               <MainMenu.DefaultItems.Export />
