@@ -281,7 +281,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   return (
     <>
-      <div ref={containerElementReference} style={{ width, height }} onFocus={handleFocus} onWheelCapture={handleWheelCapture}>
+      <div ref={containerElementReference} style={{ width, height, '--tw-excalidraw-height': height }} onFocus={handleFocus} onWheelCapture={handleWheelCapture}>
         <ParentWidgetContext.Provider value={parentWidget}>
           <Excalidraw
             excalidrawAPI={setExcalidrawAPI}

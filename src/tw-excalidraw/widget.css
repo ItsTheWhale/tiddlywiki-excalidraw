@@ -14,3 +14,7 @@
   .zen-mode-transition.App-menu_bottom--transition-left {
   transform: none;
 }
+
+.dropdown-menu-container {
+  height: calc(var(--tw-excalidraw-height) - 100px)
+}

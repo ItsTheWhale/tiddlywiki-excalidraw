@@ -9,4 +9,11 @@ declare module '*.css' {
   export default content;
 }
 
+declare module 'react' {
+  interface CSSProperties {
+    // Allow any CSS variable starting with '--'
+    [key: `--${string}`]: string | number;
+  }
+}
+
 import 'tw-react/dist/lib/type.d.ts';
