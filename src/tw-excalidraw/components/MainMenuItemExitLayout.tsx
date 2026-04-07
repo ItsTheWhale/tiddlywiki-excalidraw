@@ -1,5 +1,6 @@
 import { MainMenu } from '@excalidraw/excalidraw';
 
+import { Lingo } from './Lingo.js';
 import { Wikify } from './Wikify.js';
 
 export function MainMenuItemExitLayout(props: {
@@ -9,7 +10,7 @@ export function MainMenuItemExitLayout(props: {
 
   return (
     <MainMenu.Item onSelect={props.onSelect} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
-      <Wikify text='<<tw-excalidraw-lingo ExitLayoutButtonCaption $:/plugins/itw/tw-excalidraw/language/>>' />
+      <Lingo title='ExitLayoutButtonCaption' />
     </MainMenu.Item>
   );
 }
