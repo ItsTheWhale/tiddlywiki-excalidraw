@@ -15,7 +15,7 @@
     "publish": "npm run clean && tiddlywiki-plugin-dev publish",
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
-    "prepare": "husky install",
+    "prepare": "husky",
     "update": "npm-check-updates -u && dprint config update",
     "new": "tiddlywiki-plugin-dev new",
     "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
