@@ -33,6 +33,8 @@ export interface IProps {
 
   langCode?: string;
 
+  theme?: string;
+
   viewMode?: string;
   zenMode?: string;
   gridMode?: string;
@@ -58,6 +60,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
     scrollToContent,
     autoFocus,
     langCode,
+    theme,
     viewMode,
     zenMode,
     gridMode,
@@ -290,6 +293,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
             initialData={initialDataObject}
             autoFocus={yesOrNo(autoFocus)}
             langCode={langCode}
+            theme={theme === 'light' ? 'light' : (theme === 'dark' ? 'dark' : undefined)}
             viewModeEnabled={yesOrNo(viewMode)}
             zenModeEnabled={yesOrNo(zenMode)}
             gridModeEnabled={yesOrNo(gridMode)}

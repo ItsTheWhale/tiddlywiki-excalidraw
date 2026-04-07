@@ -23,6 +23,7 @@ class ExcalidrawWidget extends Widget<IProps> {
         ?.replace(/^\$:\/languages\//, '')
         .replace('zh-Hans', 'zh-CN')
         .replace('zh-Hant', 'zh-TW') ?? undefined,
+      theme: this.getAttribute('theme'),
       viewMode: this.getAttribute('viewMode'),
       zenMode: this.getAttribute('zenMode'),
       gridMode: this.getAttribute('gridMode'),
