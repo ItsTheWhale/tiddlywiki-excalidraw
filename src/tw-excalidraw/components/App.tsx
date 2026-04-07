@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { yesOrNo } from '../utils/yes-or-no.js';
 import { MainMenuItemEmbedTiddler } from './MainMenuItemEmbedTiddler.js';
+import { MainMenuItemEnterLayout } from './MainMenuItemEnterLayout.js';
 import { MainMenuItemExitLayout } from './MainMenuItemExitLayout.js';
 import { TiddlerEmbed } from './TiddlerEmbed.js';
 import { WebEmbed } from './WebEmbed.js';
@@ -164,6 +165,10 @@ export function App(props: IProps & IDefaultWidgetProps) {
     if (!containerElementReference.current?.contains(document.activeElement)) event.stopPropagation();
   }
 
+  function handleOpenLayout(): void {
+    $tw.wiki.setText('$:/layout', 'text', undefined, '$:/plugins/itw/tw-excalidraw/ui/layout');
+  }
+
   function handleExitLayout(): void {
     $tw.wiki.setText('$:/layout', 'text', undefined, '$:/core/ui/PageTemplate');
   }
@@ -262,6 +267,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
             gridModeEnabled={yesOrNo(gridMode)}
           >
             <MainMenu>
+              <MainMenuItemEnterLayout onSelect={handleOpenLayout} />
               <MainMenuItemExitLayout onSelect={handleExitLayout} />
               <MainMenuItemEmbedTiddler excalidrawAPI={excalidrawAPI} onSelect={handleEmbedTiddler} />
               <MainMenu.Separator />

@@ -7,5 +7,6 @@ NewButtonCaption: 新增 Excalidraw 條目
 NewButtonHint: 建立一個新的 Excalidraw 條目
 OpenInLayoutButtonCaption: 編輯 Excalidraw 白板
 OpenInLayoutButtonHint: 於全屏佈局開啟并編輯 Excalidraw 白板
-StandardLayoutButtonCaption: 返回標準佈局
+EnterLayoutButtonCaption: 開啟全屏佈局
+ExitLayoutButtonCaption: 返回標準佈局
 EmbedTiddlerButtonCaption: 嵌入條目

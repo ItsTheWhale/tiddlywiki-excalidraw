@@ -7,5 +7,6 @@ NewButtonCaption: new Excalidraw tiddler
 NewButtonHint: Create an Excalidraw tiddler
 OpenInLayoutButtonCaption: edit Excalidraw whiteboard
 OpenInLayoutButtonHint: Open and edit this Excalidraw whiteboard in a fullscreen layout
-StandardLayoutButtonCaption: Return to standard layout
+EnterLayoutButtonCaption: Open fullscreen layout
+ExitLayoutButtonCaption: Return to standard layout
 EmbedTiddlerButtonCaption: Embed tiddler
