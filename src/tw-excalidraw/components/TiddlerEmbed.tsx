@@ -1,10 +1,7 @@
 import type { JSX } from 'react';
-
-import { Wikify } from './Wikify.js';
+import { Transclude } from './Transclude';
 
 export function TiddlerEmbed({ title }: { title: string }): JSX.Element {
-  const tiddler = $tw.wiki.getTiddler(title);
-
   return (
     <div
       style={{
@@ -15,7 +12,7 @@ export function TiddlerEmbed({ title }: { title: string }): JSX.Element {
         marginRight: '1em',
       }}
     >
-      <Wikify text={tiddler?.fields.text ?? ''} />
+      <Transclude title={title} />
     </div>
   );
 }

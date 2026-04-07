@@ -1,7 +1,7 @@
 import { MainMenu } from '@excalidraw/excalidraw';
 
 import { Lingo } from './Lingo.js';
-import { Wikify } from './Wikify.js';
+import { Transclude } from './Transclude.js';
 
 export function MainMenuItemExitLayout(props: {
   onSelect: (event: Event) => void;
@@ -9,7 +9,7 @@ export function MainMenuItemExitLayout(props: {
   if ($tw.wiki.getTiddlerText('$:/layout') !== '$:/plugins/itw/tw-excalidraw/ui/layout') return null;
 
   return (
-    <MainMenu.Item onSelect={props.onSelect} icon={<Wikify text='{{$:/core/images/standard-layout}}' />}>
+    <MainMenu.Item onSelect={props.onSelect} icon={<Transclude title='$:/core/images/standard-layout' />}>
       <Lingo title='ExitLayoutButtonCaption' />
     </MainMenu.Item>
   );
