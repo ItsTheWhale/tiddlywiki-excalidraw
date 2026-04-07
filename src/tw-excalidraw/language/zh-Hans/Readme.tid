@@ -1,7 +1,5 @@
 title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 
-\procedure lingo-base() $:/plugins/itw/tw-excalidraw/language/
-
 \procedure open-in-layout-button-icon() <$button class=<<tv-config-toolbar-class>>>{{$:/core/images/paint}}</$button>
 
 ! <<tw-excalidraw-lingo Name>>

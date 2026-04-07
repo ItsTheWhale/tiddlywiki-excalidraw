@@ -1,7 +1,5 @@
 title: $:/plugins/itw/tw-excalidraw/language/en-GB/Readme
 
-\procedure lingo-base() $:/plugins/itw/tw-excalidraw/language/
-
 \procedure button-icon(tiddler) <$button class=<<tv-config-toolbar-class>>><$transclude $tiddler=<<tiddler>> /></$button>
 
 ! <<tw-excalidraw-lingo Name>>

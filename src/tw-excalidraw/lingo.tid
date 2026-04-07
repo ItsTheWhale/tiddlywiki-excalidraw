@@ -1,15 +1,16 @@
 title: $:/plugins/itw/tw-excalidraw/lingo
 tags: $:/tags/Global
 
-<!-- Note that lingo-base should end with a trailing slash character -->
+<!--
+Do not use. Will be removed eventually.
 
-\procedure lingo-base()
+A highly adapted version of <https://github.com/Jermolene/TiddlyWiki5/pull/7821>.
+This will provide limited translations until a better solution is available.
 
-$:/language/
+TODO: When the necessary machinery is implemented in the TiddlyWiki core, remove this
+-->
 
-\end lingo-base
-
-\procedure tw-excalidraw-lingo(title,override-lingo-base)
+\procedure tw-excalidraw-lingo(title)
 
 <!-- Lingo procedure -->
 
@@ -21,21 +22,9 @@ $:/language/
 
 	<!-- Compute the lingo-base-->
 
-	<$let active-lingo-base={{{ [<override-lingo-base>!match[]else<lingo-base>] }}}>
+	<$let raw-language-code={{{ [[$:/language]get[text]get[name]] }}} language-code={{{ [<raw-language-code>match[en-GB]] ~[<raw-language-code>match[zh-Hant]] ~[<raw-language-code>match[zh-Hans]] ~[[en-GB]] }}}>
 
-		<!-- First try the old school <active-lingo-base><title> format -->
-
-		<$transclude $tiddler={{{ [<active-lingo-base>addsuffix<title>] }}} $mode=<<parseMode>>>
-
-			<!-- If that didn't work, try the new <lingo-base><langcode>/<title> format -->
-
-			<$let raw-language-code={{{ [[$:/language]get[text]get[name]] }}} language-code={{{ [<raw-language-code>match[en-GB]] ~[<raw-language-code>match[zh-Hant]] ~[<raw-language-code>match[zh-Hans]] ~[[en-GB]] }}}>
-
-        <$transclude $tiddler={{{ [<active-lingo-base>addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>/>
-
-			</$let>
-
-		</$transclude>
+        <$transclude $tiddler={{{ [[$:/plugins/itw/tw-excalidraw/language/]addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>/>
 
 	</$let>
 

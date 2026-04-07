@@ -1,7 +1,7 @@
 title: $:/plugins/itw/tw-excalidraw/ui/new-button
 tags: $:/tags/PageControls
-caption: {{$:/core/images/paint}} <<tw-excalidraw-lingo NewButtonCaption $:/plugins/itw/tw-excalidraw/language/>>
-description: <<tw-excalidraw-lingo NewButtonHint $:/plugins/itw/tw-excalidraw/language/>>
+caption: {{$:/core/images/paint}} <<tw-excalidraw-lingo NewButtonCaption>>
+description: <<tw-excalidraw-lingo NewButtonHint>>
 
 \whitespace trim
 
@@ -9,8 +9,8 @@ description: <<tw-excalidraw-lingo NewButtonHint $:/plugins/itw/tw-excalidraw/la
   <$action-sendmessage $message="tm-new-tiddler" type="application/vnd.excalidraw+json" />
 \end
 
-<$wikify name="hint" text="""<<tw-excalidraw-lingo NewButtonHint $:/plugins/itw/tw-excalidraw/language/>>""">
-<$wikify name="caption" text="""<<tw-excalidraw-lingo NewButtonCaption $:/plugins/itw/tw-excalidraw/language/>>""">
+<$wikify name="hint" text="""<<tw-excalidraw-lingo NewButtonHint>>""">
+<$wikify name="caption" text="""<<tw-excalidraw-lingo NewButtonCaption>>""">
 <$button
     actions=<<new-excalidraw-action>>
     tooltip=<<hint>>
