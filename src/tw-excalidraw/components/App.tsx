@@ -2,7 +2,7 @@ import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js
 import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 
 import type { ExcalidrawElement, ExcalidrawEmbeddableElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
-import { Excalidraw, MainMenu, restoreAppState, restoreElements, serializeAsJSON } from '@excalidraw/excalidraw';
+import { Excalidraw, MainMenu, restoreElements, serializeAsJSON } from '@excalidraw/excalidraw';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
 import '@excalidraw/excalidraw/index.css';
@@ -12,6 +12,7 @@ import { PositionObserver } from 'position-observer';
 import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
+import { yesOrNo } from '../utils/yes-or-no.js';
 import { MainMenuItemEmbedTiddler } from './MainMenuItemEmbedTiddler.js';
 import { MainMenuItemExitLayout } from './MainMenuItemExitLayout.js';
 import { TiddlerEmbed } from './TiddlerEmbed.js';
@@ -20,14 +21,12 @@ import { WebEmbed } from './WebEmbed.js';
 export interface IProps {
   tiddler?: string;
 
-  initialDataText?: string;
+  initialData?: ExcalidrawInitialDataState;
 
   elementId?: string;
 
   width: string;
   height: string;
-
-  scrollToContent: string;
 
   autoFocus?: string;
 
@@ -42,22 +41,13 @@ export interface IProps {
   onSave: (tiddler: string | undefined, data: string) => void;
 }
 
-type RestoredAppState = ReturnType<typeof restoreAppState>;
-
-function yesOrNo(value: string | undefined): boolean | undefined {
-  if (value === undefined) return undefined;
-
-  return value !== 'no';
-}
-
 export function App(props: IProps & IDefaultWidgetProps) {
   const {
     tiddler,
-    initialDataText,
+    initialData,
     elementId,
     width,
     height,
-    scrollToContent,
     autoFocus,
     langCode,
     theme,
@@ -143,33 +133,6 @@ export function App(props: IProps & IDefaultWidgetProps) {
       if (containerElementReference.current) observer.unobserve(containerElementReference.current);
     };
   }, [containerElementReference, excalidrawAPI]);
-
-  let initialData: {
-    elements: readonly OrderedExcalidrawElement[];
-    appState: RestoredAppState;
-    files: BinaryFiles;
-  } | undefined = undefined;
-
-  if (initialDataText) {
-    const data = JSON.parse(initialDataText) as {
-      elements: readonly ExcalidrawElement[];
-      appState: Partial<AppState>;
-      files: BinaryFiles;
-    };
-
-    initialData = {
-      elements: restoreElements(data.elements, undefined, {
-        repairBindings: true,
-      }),
-      appState: restoreAppState(data.appState, undefined),
-      files: data.files,
-    };
-  }
-
-  const initialDataObject: ExcalidrawInitialDataState = {
-    ...initialData,
-    scrollToContent: yesOrNo(scrollToContent),
-  };
 
   function handleChange(
     excalidrawElements: readonly OrderedExcalidrawElement[],
@@ -290,7 +253,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
             onLinkOpen={handleLinkOpen}
             renderEmbeddable={renderEmbeddable}
             validateEmbeddable={true}
-            initialData={initialDataObject}
+            initialData={initialData}
             autoFocus={yesOrNo(autoFocus)}
             langCode={langCode}
             theme={theme === 'light' ? 'light' : (theme === 'dark' ? 'dark' : undefined)}

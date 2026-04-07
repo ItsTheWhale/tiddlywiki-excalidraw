@@ -1,4 +1,11 @@
 import { widget as Widget } from '$:/plugins/linonetwo/tw-react/widget.js';
+
+import { restoreAppState, restoreElements } from '@excalidraw/excalidraw';
+import type { ExcalidrawElement } from '@excalidraw/excalidraw/dist/types/excalidraw/element/types';
+import type { AppState, BinaryFiles, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
+
+import { yesOrNo } from './utils/yes-or-no.js';
+
 import { App, IProps } from './components/App';
 
 import './widget.css';
@@ -10,14 +17,38 @@ class ExcalidrawWidget extends Widget<IProps> {
   public reactComponent = App;
   public getProps = () => {
     const editTitle = this.getAttribute('tiddler');
+    const scrollToContent = this.getAttribute('scrollToContent', 'yes');
+
+    let initialData: ExcalidrawInitialDataState = {
+      // ...importedData,
+      scrollToContent: yesOrNo(scrollToContent),
+    };
+
+    const initialDataText = editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : null;
+
+    if (initialDataText) {
+      const data = JSON.parse(initialDataText) as {
+        elements: readonly ExcalidrawElement[];
+        appState: Partial<AppState>;
+        files: BinaryFiles;
+      };
+
+      initialData = {
+        ...initialData,
+        elements: restoreElements(data.elements, undefined, {
+          repairBindings: true,
+        }),
+        appState: restoreAppState(data.appState, undefined),
+        files: data.files,
+      };
+    }
 
     return {
       tiddler: editTitle,
-      initialDataText: editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : '',
+      initialData,
       elementId: this.getAttribute('elementId'),
       width: this.getAttribute('width', '100%'),
       height: this.getAttribute('height', '400px'),
-      scrollToContent: this.getAttribute('scrollToContent', 'yes'),
       autoFocus: this.getAttribute('autoFocus'),
       langCode: $tw.wiki.getTiddlerText('$:/language')
         ?.replace(/^\$:\/languages\//, '')
