@@ -309,9 +309,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
               <MainMenu.DefaultItems.Help />
               <MainMenu.DefaultItems.ClearCanvas />
               <MainMenu.Separator />
-              <MainMenu.Group title='Excalidraw links'>
-                <MainMenu.DefaultItems.Socials />
-              </MainMenu.Group>
+              <MainMenu.DefaultItems.Socials />
               <MainMenu.Separator />
               <MainMenu.DefaultItems.ToggleTheme />
               <MainMenu.DefaultItems.ChangeCanvasBackground />
