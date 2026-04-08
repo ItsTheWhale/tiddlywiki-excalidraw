@@ -20,7 +20,6 @@ class ExcalidrawWidget extends Widget<IProps> {
     const scrollToContent = this.getAttribute('scrollToContent', 'yes');
 
     let initialData: ExcalidrawInitialDataState = {
-      // ...importedData,
       scrollToContent: yesOrNo(scrollToContent),
     };
 
@@ -42,7 +41,6 @@ class ExcalidrawWidget extends Widget<IProps> {
         files: data.files,
       };
     }
-
     return {
       tiddler: editTitle,
       initialData,
