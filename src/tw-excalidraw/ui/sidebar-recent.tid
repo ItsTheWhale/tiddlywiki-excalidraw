@@ -1,0 +1,5 @@
+title: $:/plugins/itw/tw-excalidraw/ui/sidebar-recent
+tags: $:/tags/tw-excalidraw/Sidebar
+caption: {{$:/core/images/timestamp-on}}
+
+{{$:/core/ui/SideBar/Recent}}

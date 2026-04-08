@@ -22,3 +22,6 @@
   .zen-mode-transition.App-menu_bottom--transition-left {
   transform: none;
 }
+.excalidraw > .sidebar {
+  padding: 0.5rem;
+}

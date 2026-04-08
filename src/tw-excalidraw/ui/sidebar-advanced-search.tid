@@ -1,0 +1,12 @@
+title: $:/plugins/itw/tw-excalidraw/ui/sidebar-advanced-search
+tags: $:/tags/tw-excalidraw/Sidebar
+caption: {{$:/core/images/advanced-search-button}}
+
+<style>
+/* Excalidraw's styles make Advanced Search look weird */
+.excalidraw .sidebar-tabs-root .tw-excalidraw-sidebar-tab [role="tablist"] {
+  display: initial;
+}
+</style>
+
+{{$:/AdvancedSearch}}

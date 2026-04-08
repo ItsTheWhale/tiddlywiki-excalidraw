@@ -1,10 +1,20 @@
 import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js';
-import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
+import { ParentWidgetContext, useFilter } from '$:/plugins/linonetwo/tw-react/index.js';
 
 import { getElementAbsoluteCoords } from '@excalidraw/element';
 import type { ExcalidrawElement, ExcalidrawEmbeddableElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
 
-import { Excalidraw, Footer, MainMenu, restoreElements, sceneCoordsToViewportCoords, serializeAsJSON, viewportCoordsToSceneCoords } from '@excalidraw/excalidraw';
+import {
+  DefaultSidebar,
+  Excalidraw,
+  Footer,
+  MainMenu,
+  restoreElements,
+  sceneCoordsToViewportCoords,
+  serializeAsJSON,
+  Sidebar,
+  viewportCoordsToSceneCoords,
+} from '@excalidraw/excalidraw';
 import type { ElementsMap } from '@excalidraw/excalidraw/dist/types/excalidraw/element/types';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
@@ -26,6 +36,7 @@ import { MainMenuItemExitLayout } from './MainMenuItemExitLayout.js';
 import { TiddlerEmbed } from './TiddlerEmbed.js';
 import { Transclude } from './Transclude.js';
 import { WebEmbed } from './WebEmbed.js';
+import { Wikify } from './Wikify.js';
 
 export interface IProps {
   tiddler?: string;
@@ -74,6 +85,8 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   const embeddablePreviewButtons = useRef<Map<string, HTMLImageElement>>(new Map());
   const embeddableEditButtons = useRef<Map<string, HTMLImageElement>>(new Map());
+
+  const sidebarTabs = useFilter('[all[shadows+tiddlers]tag[$:/tags/tw-excalidraw/Sidebar]]').map($tw.wiki.getTiddler).filter((t) => t !== undefined);
 
   function insertTiddlerEmbed(title: string, x: number, y: number): void {
     if (!excalidrawAPI) return;
@@ -502,6 +515,32 @@ export function App(props: IProps & IDefaultWidgetProps) {
               <MainMenu.DefaultItems.ToggleTheme />
               <MainMenu.DefaultItems.ChangeCanvasBackground />
             </MainMenu>
+
+            <DefaultSidebar>
+              <DefaultSidebar.TabTriggers>
+                {sidebarTabs.map((tab) => (
+                  <Sidebar.TabTrigger tab={tab.fields.title}>
+                    {tab.fields.caption
+                      ? <Wikify text={String(tab.fields.caption)} />
+                      : tab.fields.title}
+                  </Sidebar.TabTrigger>
+                ))}
+              </DefaultSidebar.TabTriggers>
+              {sidebarTabs.map((tab) => {
+                return (
+                  <Sidebar.Tab tab={tab.fields.title}>
+                    <div
+                      className='tw-excalidraw-sidebar-tab'
+                      onKeyDownCapture={(event) => {
+                        event.stopPropagation();
+                      }}
+                    >
+                      <Transclude title={tab.fields.title} />
+                    </div>
+                  </Sidebar.Tab>
+                );
+              })}
+            </DefaultSidebar>
 
             <Footer>
               <button
