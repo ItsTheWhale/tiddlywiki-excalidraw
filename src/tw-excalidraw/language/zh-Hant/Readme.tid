@@ -36,7 +36,7 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 
 !! 嵌入條目
 
-當鏈結把用雙花括弧包圍的條目名稱（`{{條目名稱}}`）設入 Excalidraw 網站嵌入元素。 可使用 <<button-icon $:/core/images/transcludify>> 工具打開 Advanced Search 搜尋並為點擊過的條目自動生成嵌入元素。
+當鏈結把用雙花括弧包圍的條目名稱（`{{條目名稱}}`）設入 Excalidraw 網站嵌入元素。 可使用 <<button-icon $:/core/images/transcludify>> 工具打開進階搜尋並為點擊過的條目自動生成嵌入元素。
 
 
 !! 拖放

@@ -37,7 +37,7 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 
 !! 嵌入条目
 
-当链结把用双花括弧包围的条目名称（`{{条目名称}}`）设入 Excalidraw 网站嵌入元素。 可使用 <<button-icon $:/core/images/transcludify>> 工具打开 Advanced Search 搜寻并为点击过的条目自动生成嵌入元素。
+当链结把用双花括弧包围的条目名称（`{{条目名称}}`）设入 Excalidraw 网站嵌入元素。 可使用 <<button-icon $:/core/images/transcludify>> 工具打开进阶搜寻并为点击过的条目自动生成嵌入元素。
 
 
 !! 拖放
