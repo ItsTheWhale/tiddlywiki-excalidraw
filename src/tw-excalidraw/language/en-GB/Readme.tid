@@ -39,6 +39,11 @@ To link to other Excalidraw elements, prefix the element ID with `##` (`##elemen
 Set the link of a Excalidraw web embed element to the tiddler title enclosed in curly braces (`{{Tiddler title}}`). The <<button-icon $:/core/images/transcludify>> button will also open the Advanced Search in a modal and automatically insert all clicked tiddlers as embeds.
 
 
+!! Drag and drop
+
+Dragging tiddlers into the widget will insert them into the canvas as embeds. If the tiddler does not already exist, it will be imported into the wiki.
+
+
 !! Widget
 
 This plugin provides the `<$excalidraw />` widget to display a whiteboard.

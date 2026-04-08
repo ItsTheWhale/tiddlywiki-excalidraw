@@ -64,6 +64,28 @@ export function App(props: IProps & IDefaultWidgetProps) {
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
   const [isInitialLoad, setIsInitialLoad] = useState<boolean>(false);
 
+  function insertTiddlerEmbed(title: string): void {
+    if (!excalidrawAPI) return;
+
+    const appState = excalidrawAPI.getAppState();
+
+    const embed = restoreElements([{
+      type: 'embeddable',
+      x: appState.scrollX,
+      y: appState.scrollY,
+      width: 560,
+      height: 315,
+      link: `{{${title}}}`,
+      roundness: {
+        type: 3,
+      },
+    } as unknown as ExcalidrawEmbeddableElement], undefined);
+
+    excalidrawAPI.updateScene({
+      elements: [...excalidrawAPI.getSceneElements(), ...embed],
+    });
+  }
+
   useEffect(() => {
     if (!excalidrawAPI) return;
 
@@ -77,23 +99,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
       if (!eventTiddler || typeof eventTiddler !== 'string' || eventTiddler !== tiddler || !event.param) return true;
 
-      const appState = excalidrawAPI.getAppState();
-
-      const embed = restoreElements([{
-        type: 'embeddable',
-        x: appState.scrollX,
-        y: appState.scrollY,
-        width: 560,
-        height: 315,
-        link: `{{${event.param}}}`,
-        roundness: {
-          type: 3,
-        },
-      } as unknown as ExcalidrawEmbeddableElement], undefined);
-
-      excalidrawAPI.updateScene({
-        elements: [...excalidrawAPI.getSceneElements(), ...embed],
-      });
+      insertTiddlerEmbed(event.param);
 
       return false;
     }
@@ -155,6 +161,26 @@ export function App(props: IProps & IDefaultWidgetProps) {
     const data = serializeAsJSON(excalidrawElements, appState, binaryFiles, 'local');
 
     onSave(tiddler, data);
+  }
+
+  function handleDrop(event: React.DragEvent<HTMLDivElement>): void {
+    if (viewMode) return;
+
+    console.log(event);
+
+    const title = event.dataTransfer.getData('text/plain');
+    const data = event.dataTransfer.getData('text/vnd.tiddler');
+
+    if (!title || !data) return;
+
+    if (!$tw.wiki.getTiddler(title)) {
+      parentWidget?.dispatchEvent({
+        type: 'tm-import-tiddlers',
+        param: JSON.stringify([JSON.parse(data)]),
+      });
+    }
+
+    insertTiddlerEmbed(title);
   }
 
   function handleFocus(): void {
@@ -249,7 +275,13 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   return (
     <>
-      <div ref={containerElementReference} style={{ width, height, '--tw-excalidraw-height': height }} onFocus={handleFocus} onWheelCapture={handleWheelCapture}>
+      <div
+        ref={containerElementReference}
+        style={{ width, height, '--tw-excalidraw-height': height }}
+        onDrop={handleDrop}
+        onFocus={handleFocus}
+        onWheelCapture={handleWheelCapture}
+      >
         <ParentWidgetContext.Provider value={parentWidget}>
           <Excalidraw
             excalidrawAPI={setExcalidrawAPI}
