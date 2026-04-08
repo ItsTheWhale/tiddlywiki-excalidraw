@@ -9,6 +9,8 @@ import '@excalidraw/excalidraw/index.css';
 
 import { PositionObserver } from 'position-observer';
 
+import type { Tiddler } from 'tiddlywiki';
+
 import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -167,21 +169,16 @@ export function App(props: IProps & IDefaultWidgetProps) {
   function handleDrop(event: React.DragEvent<HTMLDivElement>): void {
     if (viewMode) return;
 
-    console.log(event);
+    const tiddler = JSON.parse(event.dataTransfer.getData('text/vnd.tiddler')) as Tiddler['fields'];
 
-    const title = event.dataTransfer.getData('text/plain');
-    const data = event.dataTransfer.getData('text/vnd.tiddler');
-
-    if (!title || !data) return;
-
-    if (!$tw.wiki.getTiddler(title)) {
+    if (!$tw.wiki.getTiddler(tiddler.title)) {
       parentWidget?.dispatchEvent({
         type: 'tm-import-tiddlers',
-        param: JSON.stringify([JSON.parse(data)]),
+        param: JSON.stringify([tiddler]),
       });
     }
 
-    insertTiddlerEmbed(title);
+    insertTiddlerEmbed(tiddler.title);
   }
 
   function handleFocus(): void {
