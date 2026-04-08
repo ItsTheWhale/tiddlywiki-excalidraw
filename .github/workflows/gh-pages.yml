@@ -47,7 +47,7 @@ jobs:
         run: pnpm install
 
       - name: Build Library and static website
-        run: pnpm run publish:offline
+        run: pnpm run publish
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
