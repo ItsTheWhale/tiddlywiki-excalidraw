@@ -2,7 +2,7 @@ import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js
 import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 
 import type { ExcalidrawElement, ExcalidrawEmbeddableElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
-import { Excalidraw, MainMenu, restoreElements, serializeAsJSON } from '@excalidraw/excalidraw';
+import { Excalidraw, Footer, MainMenu, restoreElements, serializeAsJSON } from '@excalidraw/excalidraw';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
 import '@excalidraw/excalidraw/index.css';
@@ -17,6 +17,7 @@ import { MainMenuItemEmbedTiddler } from './MainMenuItemEmbedTiddler.js';
 import { MainMenuItemEnterLayout } from './MainMenuItemEnterLayout.js';
 import { MainMenuItemExitLayout } from './MainMenuItemExitLayout.js';
 import { TiddlerEmbed } from './TiddlerEmbed.js';
+import { Transclude } from './Transclude.js';
 import { WebEmbed } from './WebEmbed.js';
 
 export interface IProps {
@@ -316,6 +317,18 @@ export function App(props: IProps & IDefaultWidgetProps) {
               <MainMenu.DefaultItems.ToggleTheme />
               <MainMenu.DefaultItems.ChangeCanvasBackground />
             </MainMenu>
+
+            <Footer>
+              <button
+                onClick={$tw.wiki.getTiddlerText('$:/layout') === '$:/plugins/itw/tw-excalidraw/ui/layout' ? handleExitLayout : handleOpenLayout}
+                className='help-icon'
+                style={{
+                  marginInlineStart: '0.6em',
+                }}
+              >
+                <Transclude title='$:/core/images/standard-layout' />
+              </button>
+            </Footer>
           </Excalidraw>
         </ParentWidgetContext.Provider>
       </div>
