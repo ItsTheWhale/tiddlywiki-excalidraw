@@ -57,6 +57,8 @@ This plugin provides the `<$excalidraw />` widget to display a whiteboard.
 |`width` |Width of the whiteboard element |String |`100%` |
 |`height` |Height of the whiteboard element |String |`400px` |
 |`scrollToContent` |Automatically scroll to the nearest element |`yes` or `no` |`yes` |
+|`scrollX` |Manually set the x-coordinate to initially scroll to. Overrides `scrollToContent`. |String |None |
+|`scrollY` |Manually set the y-coordinate to initially scroll to. Overrides `scrollToContent`. |String |None |
 |`autoFocus` |Automatically focus the widget on load |`yes` or `no` |None |
 |`theme` |Controls Excalidraw's theme. If set, the user will not be able to set the theme themselves. |`light` or `dark` |None |
 |`viewMode` |Enables `view` mode |`yes` or `no` |None |

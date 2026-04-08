@@ -17,10 +17,15 @@ class ExcalidrawWidget extends Widget<IProps> {
   public reactComponent = App;
   public getProps = () => {
     const editTitle = this.getAttribute('tiddler');
+
     const scrollToContent = this.getAttribute('scrollToContent', 'yes');
 
+    const scrollX = this.getAttribute('scrollX');
+    const scrollY = this.getAttribute('scrollY');
+
     let initialData: ExcalidrawInitialDataState = {
-      scrollToContent: yesOrNo(scrollToContent),
+      // Scroll to content if scrollToContent is enabled and scrollX/Y are not set
+      scrollToContent: yesOrNo(scrollToContent) && !scrollX && !scrollY,
     };
 
     const initialDataText = editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : null;
@@ -37,7 +42,10 @@ class ExcalidrawWidget extends Widget<IProps> {
         elements: restoreElements(data.elements, undefined, {
           repairBindings: true,
         }),
-        appState: restoreAppState(data.appState, undefined),
+        appState: restoreAppState(data.appState, {
+          scrollX: scrollX ? Number(scrollX) : undefined,
+          scrollY: scrollY ? Number(scrollY) : undefined,
+        }),
         files: data.files,
       };
     }
