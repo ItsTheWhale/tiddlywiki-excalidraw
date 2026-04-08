@@ -1,5 +1,5 @@
 title: $:/plugins/itw/tw-excalidraw/ui/layout
-name: <<tw-excalidraw-lingo Name
+name: <<tw-excalidraw-lingo Name>>
 description: <<tw-excalidraw-lingo Description>>
 tags: $:/tags/Layout
 icon: {{$:/core/images/paint}}
