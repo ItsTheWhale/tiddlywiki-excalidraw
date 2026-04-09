@@ -82,6 +82,12 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 
 !! 安装
 
+!!! 从 CPL 安装
+
+建议从 CPL 安装此插件（[[https://tw-cpl.netlify.app/#Plugin_202604081616762:Plugin_202604081616762]]）。
+
+!!! 拖放安装
+
 请把此插件及其前置插件拖放至您的维基：
 
 * [[$:/plugins/itw/tw-excalidraw]]

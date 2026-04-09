@@ -83,6 +83,12 @@ Tiddlers with a `type` of `application/vnd.excalidraw+json` will be considered a
 
 !! Installation
 
+!!! From the CPL
+
+It is recommended to install this plugin from the CPL ([[https://tw-cpl.netlify.app/#Plugin_202604081616762:Plugin_202604081616762]]).
+
+!!! Drag and drop
+
 Drag and drop the plugin and its dependencies:
 
 * [[$:/plugins/itw/tw-excalidraw]]
