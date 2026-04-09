@@ -2,7 +2,7 @@ import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js
 import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 
 import type { ExcalidrawElement, ExcalidrawEmbeddableElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
-import { Excalidraw, Footer, MainMenu, restoreElements, serializeAsJSON } from '@excalidraw/excalidraw';
+import { Excalidraw, Footer, MainMenu, restoreElements, serializeAsJSON, viewportCoordsToSceneCoords } from '@excalidraw/excalidraw';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
 import '@excalidraw/excalidraw/index.css';
@@ -67,15 +67,13 @@ export function App(props: IProps & IDefaultWidgetProps) {
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
   const [isInitialLoad, setIsInitialLoad] = useState<boolean>(false);
 
-  function insertTiddlerEmbed(title: string): void {
+  function insertTiddlerEmbed(title: string, x: number, y: number): void {
     if (!excalidrawAPI) return;
-
-    const appState = excalidrawAPI.getAppState();
 
     const embed = restoreElements([{
       type: 'embeddable',
-      x: appState.scrollX,
-      y: appState.scrollY,
+      x,
+      y,
       width: 560,
       height: 315,
       link: `{{${title}}}`,
@@ -102,7 +100,9 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
       if (!eventTiddler || typeof eventTiddler !== 'string' || eventTiddler !== tiddler || !event.param) return true;
 
-      insertTiddlerEmbed(event.param);
+      const appState = excalidrawAPI.getAppState();
+
+      insertTiddlerEmbed(event.param, appState.scrollX, appState.scrollY);
 
       return false;
     }
@@ -167,7 +167,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
   }
 
   function handleDrop(event: React.DragEvent<HTMLDivElement>): void {
-    if (viewMode) return;
+    if (viewMode || !excalidrawAPI) return;
 
     const tiddler = JSON.parse(event.dataTransfer.getData('text/vnd.tiddler')) as Tiddler['fields'];
 
@@ -178,7 +178,14 @@ export function App(props: IProps & IDefaultWidgetProps) {
       });
     }
 
-    insertTiddlerEmbed(tiddler.title);
+    const sceneCoordinates = viewportCoordsToSceneCoords({
+      clientX: event.clientX,
+      clientY: event.clientY,
+    }, {
+      ...excalidrawAPI.getAppState(),
+    });
+
+    insertTiddlerEmbed(tiddler.title, sceneCoordinates.x, sceneCoordinates.y);
   }
 
   function handleFocus(): void {
