@@ -8,8 +8,8 @@ export function TiddlerEmbed({ title }: { title: string }): JSX.Element {
         height: '100%',
         overflow: 'auto',
         overscrollBehavior: 'contain',
-        marginLeft: '1em',
-        marginRight: '1em',
+        paddingLeft: '1em',
+        paddingRight: '1em',
       }}
     >
       <Transclude title={title} />
