@@ -296,6 +296,11 @@ export function App(props: IProps & IDefaultWidgetProps) {
             renderEmbeddable={renderEmbeddable}
             validateEmbeddable={true}
             initialData={initialData}
+            UIOptions={{
+              canvasActions: {
+                toggleTheme: true,
+              },
+            }}
             autoFocus={yesOrNo(autoFocus)}
             langCode={langCode}
             theme={theme === 'light' ? 'light' : (theme === 'dark' ? 'dark' : undefined)}

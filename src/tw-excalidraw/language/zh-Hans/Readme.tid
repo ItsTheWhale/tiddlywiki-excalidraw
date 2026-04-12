@@ -64,7 +64,7 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 |`scrollX` |人手设定初始导向的 x 座标并使 `scrollToContent` 无效 |字符串 |无 |
 |`scrollY` |人手设定初始导向的 y 座标并使 `scrollToContent` 无效 |字符串 |无 |
 |`autoFocus` |载入组件时自动聚焦组件 |`yes` 或 `no` |无 |
-|`theme` |设定布景主题并防止在白板内擅自更改。 |`light` or `dark` |无 |
+|`theme` |设定布景主题。 |`light` or `dark` |无 |
 |`viewMode` |启用 `view` 模式 |`yes` 或 `no` |无 |
 |`zenMode` |启用 `zen` 模式 |`yes` 或 `no` |无 |
 |`gridMode` |启用 `grid` 模式 |`yes` 或 `no` |无 |
