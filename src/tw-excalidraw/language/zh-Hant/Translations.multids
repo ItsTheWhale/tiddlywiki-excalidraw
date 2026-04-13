@@ -10,3 +10,7 @@ OpenInLayoutButtonHint: 於全屏佈局開啟并編輯 Excalidraw 白板
 EnterLayoutButtonCaption: 開啟全屏佈局
 ExitLayoutButtonCaption: 返回標準佈局
 EmbedTiddlerButtonCaption: 嵌入條目
+
+Settings/Description: 這些設定讓您自訂 tw-excalidraw 的行為。
+Settings/DefaultTheme/Caption: 預設佈景主題
+Settings/DefaultTheme/Hint: 指定預設的佈景主題

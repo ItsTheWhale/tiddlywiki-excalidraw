@@ -10,3 +10,7 @@ OpenInLayoutButtonHint: Open and edit this Excalidraw whiteboard in a fullscreen
 EnterLayoutButtonCaption: Open fullscreen layout
 ExitLayoutButtonCaption: Return to standard layout
 EmbedTiddlerButtonCaption: Embed tiddler
+
+Settings/Description: These settings let you customise the behaviour of tw-excalidraw.
+Settings/DefaultTheme/Caption: Default Theme
+Settings/DefaultTheme/Hint: Specify the default theme

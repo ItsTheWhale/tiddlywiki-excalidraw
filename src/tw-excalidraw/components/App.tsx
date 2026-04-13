@@ -36,7 +36,7 @@ export interface IProps {
 
   langCode?: string;
 
-  theme?: string;
+  theme: string;
 
   viewMode?: string;
   zenMode?: string;

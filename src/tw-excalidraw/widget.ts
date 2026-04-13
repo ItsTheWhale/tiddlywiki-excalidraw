@@ -4,6 +4,8 @@ import { restoreAppState, restoreElements } from '@excalidraw/excalidraw';
 import type { ExcalidrawElement } from '@excalidraw/excalidraw/dist/types/excalidraw/element/types';
 import type { AppState, BinaryFiles, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
+import type { IChangedTiddlers } from 'tiddlywiki';
+
 import { yesOrNo } from './utils/yes-or-no.js';
 
 import { App, IProps } from './components/App';
@@ -29,6 +31,25 @@ class ExcalidrawWidget extends Widget<IProps> {
     };
 
     const initialDataText = editTitle ? $tw.wiki.getTiddlerText(editTitle) ?? '' : null;
+
+    let theme = this.getAttribute('theme');
+
+    if (!theme) {
+      const defaultTheme = $tw.wiki.getTiddlerText('$:/config/itw/tw-excalidraw/DefaultTheme', 'auto');
+
+      if (defaultTheme === 'auto') {
+        const palette = $tw.wiki.getTiddlerText('$:/palette');
+
+        if (palette) {
+          const colourScheme = $tw.wiki.getTiddler(palette)?.fields['color-scheme'];
+
+          if (colourScheme === 'light') theme = 'light';
+          else if (colourScheme === 'dark') theme = 'dark';
+        }
+
+        if (!theme) theme = 'light';
+      } else theme = defaultTheme;
+    }
 
     if (initialDataText) {
       const data = JSON.parse(initialDataText) as {
@@ -60,7 +81,7 @@ class ExcalidrawWidget extends Widget<IProps> {
         ?.replace(/^\$:\/languages\//, '')
         .replace('zh-Hans', 'zh-CN')
         .replace('zh-Hant', 'zh-TW') ?? undefined,
-      theme: this.getAttribute('theme'),
+      theme,
       viewMode: this.getAttribute('viewMode'),
       zenMode: this.getAttribute('zenMode'),
       gridMode: this.getAttribute('gridMode'),
@@ -102,7 +123,7 @@ class ExcalidrawWidget extends Widget<IProps> {
     this.lastModified = $tw.wiki.getTiddler(tiddlerTitle)?.fields.modified?.getTime() ?? Infinity;
   }
 
-  refresh(): boolean {
+  refresh(changedTiddlers: IChangedTiddlers): boolean {
     const tiddlerName = this.getAttribute('tiddler');
     const changedAttributes = this.computeAttributes();
 
@@ -121,7 +142,12 @@ class ExcalidrawWidget extends Widget<IProps> {
         // Another instance did not modify the tiddler
         modified <= this.lastModified &&
         // Attributes did not change
-        Object.keys(changedAttributes).length === 0
+        Object.keys(changedAttributes).length === 0 &&
+        // Palette was not changed
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        !changedTiddlers['$:/palette'] &&
+        // No configuration was changed
+        !Object.keys(changedTiddlers).find((title) => title.startsWith('$:/config/itw/tw-excalidraw/'))
       )
     ) return false;
 

@@ -1,0 +1,19 @@
+title: $:/plugins/itw/tw-excalidraw/ui/settings
+tags: $:/tags/ControlPanel/SettingsTab
+caption: <<tw-excalidraw-lingo Name>>
+
+<<tw-excalidraw-lingo Settings/Description>>
+
+<div class="tc-control-panel-setting" >
+
+!!.tc-control-panel-accent <<tw-excalidraw-lingo Settings/DefaultTheme/Caption>>
+
+<$link to="$:/config/itw/tw-excalidraw/DefaultTheme"><<tw-excalidraw-lingo Settings/DefaultTheme/Hint>></$link>
+
+<$select tiddler="$:/config/itw/tw-excalidraw/DefaultTheme">
+	<option value="auto">auto</option>
+	<option value="light">light</option>
+	<option value="dark">dark</option>
+</$select>
+
+</div>
