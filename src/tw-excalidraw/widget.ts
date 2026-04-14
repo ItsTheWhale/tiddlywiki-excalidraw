@@ -89,19 +89,19 @@ class ExcalidrawWidget extends Widget<IProps> {
     };
   };
 
-  private isRefresh: boolean = false;
-  private lastModified: number = new Date().getTime();
+  private isReady: boolean = false;
+  private lastModified: number = 0;
 
   private onSave(tiddlerTitle: string | undefined, data: string): void {
     if (!tiddlerTitle) return;
 
     const tiddler = $tw.wiki.getTiddler(tiddlerTitle);
-    const modified = tiddler?.fields.modified?.getTime() ?? -Infinity;
+    const modified = tiddler?.fields.modified?.getTime() ?? 0;
 
     // As Excalidraw fires an onSave event on unmount, prevent infinite saving loops if this widget is not newly constructed
-    if (this.isRefresh) {
+    if (!this.isReady) {
       this.lastModified = modified;
-      this.isRefresh = false;
+      this.isReady = true;
       return;
     }
 
@@ -111,7 +111,7 @@ class ExcalidrawWidget extends Widget<IProps> {
       // If the update is unnecessary
       tiddler.fields.text === data ||
       // If another instance modified the tiddler
-      modified > this.lastModified
+      modified !== this.lastModified
     ) return;
 
     $tw.wiki.setText(tiddlerTitle, 'text', undefined, data);
@@ -120,7 +120,7 @@ class ExcalidrawWidget extends Widget<IProps> {
       $tw.wiki.setText(tiddlerTitle, 'type', undefined, 'application/vnd.excalidraw+json');
     }
 
-    this.lastModified = $tw.wiki.getTiddler(tiddlerTitle)?.fields.modified?.getTime() ?? Infinity;
+    this.lastModified = $tw.wiki.getTiddler(tiddlerTitle)?.fields.modified?.getTime() ?? 0;
   }
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
@@ -131,7 +131,7 @@ class ExcalidrawWidget extends Widget<IProps> {
     if (!tiddlerName) return false;
 
     const tiddler = $tw.wiki.getTiddler(tiddlerName);
-    const modified = tiddler?.fields.modified?.getTime() ?? -Infinity;
+    const modified = tiddler?.fields.modified?.getTime() ?? 0;
 
     // Do not refresh if:
     if (
@@ -140,7 +140,7 @@ class ExcalidrawWidget extends Widget<IProps> {
       // If tiddler:
       (
         // Another instance did not modify the tiddler
-        modified <= this.lastModified &&
+        modified === this.lastModified &&
         // Attributes did not change
         Object.keys(changedAttributes).length === 0 &&
         // Palette was not changed
@@ -150,8 +150,6 @@ class ExcalidrawWidget extends Widget<IProps> {
         !Object.keys(changedTiddlers).find((title) => title.startsWith('$:/config/itw/tw-excalidraw/'))
       )
     ) return false;
-
-    this.lastModified = modified;
 
     this.refreshSelf();
 
@@ -163,8 +161,8 @@ class ExcalidrawWidget extends Widget<IProps> {
     this.root = undefined;
     super.refreshSelf();
 
-    // Here we set isRefresh to true to signal that this is not a newly constructed widget
-    this.isRefresh = true;
+    // Here we set isReady to false to signal that this is undergoing a refresh
+    this.isReady = false;
   }
 }
 

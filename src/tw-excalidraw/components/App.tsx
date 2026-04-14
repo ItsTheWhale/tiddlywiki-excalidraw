@@ -65,7 +65,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
   const containerElementReference = useRef<HTMLDivElement>(null);
 
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
-  const [isInitialLoad, setIsInitialLoad] = useState<boolean>(false);
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   function insertTiddlerEmbed(title: string, x: number, y: number): void {
     if (!excalidrawAPI) return;
@@ -150,8 +150,8 @@ export function App(props: IProps & IDefaultWidgetProps) {
     binaryFiles: BinaryFiles,
   ): void {
     // This is an awful idea, but there is no other option
-    if (!isInitialLoad && excalidrawAPI) {
-      setIsInitialLoad(true);
+    if (!isReady && excalidrawAPI) {
+      setIsReady(true);
 
       if (elementId) {
         excalidrawAPI.scrollToContent(elementId, {
@@ -160,6 +160,11 @@ export function App(props: IProps & IDefaultWidgetProps) {
         });
       }
     }
+
+    // Disturbingly, Excalidraw fires many change events for no apparent reason
+    // I have not been able to find a reliable way to disambiguate these bogus events from real changes
+    // This locks the only widget able to write data to the currently active one
+    if (!containerElementReference.current?.contains(document.activeElement)) return;
 
     const data = serializeAsJSON(excalidrawElements, appState, binaryFiles, 'local');
 
@@ -189,6 +194,8 @@ export function App(props: IProps & IDefaultWidgetProps) {
   }
 
   function handleFocus(): void {
+    if ($tw.wiki.getTiddlerText('$:/temp/itw/tw-excalidraw/FocusedTiddler') === props.tiddler) return;
+
     $tw.wiki.setText('$:/temp/itw/tw-excalidraw/FocusedTiddler', 'text', undefined, props.tiddler);
   }
 
