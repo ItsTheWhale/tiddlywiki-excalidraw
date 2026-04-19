@@ -1,5 +1,11 @@
 title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Changelog
 
+! v0.2.0
+
+* 清除小毛病
+* 让布景主题可自行预设
+
+
 ! v0.1.0
 
 * 首次发布插件！

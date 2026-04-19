@@ -1,5 +1,11 @@
 title: $:/plugins/itw/tw-excalidraw/language/en-GB/Changelog
 
+! v0.2.0
+
+* Clean up various small issues
+* Add setting to configure default theme
+
+
 ! v0.1.0
 
 * Initial release!
