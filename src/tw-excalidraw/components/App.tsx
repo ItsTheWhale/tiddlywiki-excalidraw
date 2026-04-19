@@ -161,7 +161,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
       }
     }
 
-    const isActive = !containerElementReference.current?.contains(document.activeElement);
+    const isActive = containerElementReference.current?.contains(document.activeElement) ?? false;
 
     const data = serializeAsJSON(excalidrawElements, appState, binaryFiles, 'local');
 
