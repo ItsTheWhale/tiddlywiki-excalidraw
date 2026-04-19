@@ -1,5 +1,10 @@
 title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Changelog
 
+! v0.2.1
+
+* 修復儲存和更新功能方面的問題
+
+
 ! v0.2.0
 
 * 清除小毛病

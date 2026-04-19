@@ -1,5 +1,10 @@
 title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Changelog
 
+! v0.2.1
+
+* 修复储存和更新功能方面的问题
+
+
 ! v0.2.0
 
 * 清除小毛病
