@@ -131,28 +131,20 @@ class ExcalidrawWidget extends Widget<IProps> {
     const tiddlerName = this.getAttribute('tiddler');
     const changedAttributes = this.computeAttributes();
 
-    // Do not refresh if no tiddler
-    if (!tiddlerName) return false;
-
-    const tiddler = $tw.wiki.getTiddler(tiddlerName);
+    const tiddler = tiddlerName ? $tw.wiki.getTiddler(tiddlerName) : null;
     const modified = tiddler?.fields.modified?.getTime() ?? 0;
 
     // Do not refresh if:
     if (
-      // No tiddler
-      !tiddler ||
-      // If tiddler:
-      (
-        // Another instance did not modify the tiddler
-        modified === this.lastModified &&
-        // Attributes did not change
-        Object.keys(changedAttributes).length === 0 &&
-        // Palette was not changed
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        !changedTiddlers['$:/palette'] &&
-        // No configuration was changed
-        !Object.keys(changedTiddlers).find((title) => title.startsWith('$:/config/itw/tw-excalidraw/'))
-      )
+      // Another instance did not modify the tiddler
+      modified === this.lastModified &&
+      // Attributes did not change
+      Object.keys(changedAttributes).length === 0 &&
+      // Palette was not changed
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      !changedTiddlers['$:/palette'] &&
+      // No configuration was changed
+      !Object.keys(changedTiddlers).find((title) => title.startsWith('$:/config/itw/tw-excalidraw/'))
     ) return false;
 
     this.refreshSelf();
