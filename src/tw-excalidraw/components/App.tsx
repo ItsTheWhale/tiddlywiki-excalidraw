@@ -42,7 +42,7 @@ export interface IProps {
   zenMode?: string;
   gridMode?: string;
 
-  onSave: (tiddler: string | undefined, data: string) => void;
+  onSave: (tiddler: string | undefined, data: string, isActive: boolean) => void;
 }
 
 export function App(props: IProps & IDefaultWidgetProps) {
@@ -161,14 +161,11 @@ export function App(props: IProps & IDefaultWidgetProps) {
       }
     }
 
-    // Disturbingly, Excalidraw fires many change events for no apparent reason
-    // I have not been able to find a reliable way to disambiguate these bogus events from real changes
-    // This locks the only widget able to write data to the currently active one
-    if (!containerElementReference.current?.contains(document.activeElement)) return;
+    const isActive = !containerElementReference.current?.contains(document.activeElement);
 
     const data = serializeAsJSON(excalidrawElements, appState, binaryFiles, 'local');
 
-    onSave(tiddler, data);
+    onSave(tiddler, data, isActive);
   }
 
   function handleDrop(event: React.DragEvent<HTMLDivElement>): void {

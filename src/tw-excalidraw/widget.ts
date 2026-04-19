@@ -92,7 +92,7 @@ class ExcalidrawWidget extends Widget<IProps> {
   private isReady: boolean = false;
   private lastModified: number = 0;
 
-  private onSave(tiddlerTitle: string | undefined, data: string): void {
+  private onSave(tiddlerTitle: string | undefined, data: string, isActive: boolean): void {
     if (!tiddlerTitle) return;
 
     const tiddler = $tw.wiki.getTiddler(tiddlerTitle);
@@ -106,6 +106,10 @@ class ExcalidrawWidget extends Widget<IProps> {
     }
 
     if (
+      // Disturbingly, Excalidraw fires many change events for no apparent reason
+      // I have not been able to find a reliable way to disambiguate these bogus events from real changes
+      // This locks the only widget able to write data to the currently active one
+      !isActive ||
       // We created the tiddler already, so if it does not exist, it must be deleted
       !tiddler ||
       // If the update is unnecessary
