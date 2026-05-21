@@ -110,7 +110,13 @@ export function App(props: IProps & IDefaultWidgetProps) {
     $tw.rootWidget.addEventListener('tw-excalidraw-search', handler);
 
     return () => {
-      $tw.rootWidget.removeEventListener('tw-excalidraw-search', handler);
+      // removeEventListener() only exists on v5.3.7+
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      if ($tw.rootWidget.removeEventListener) {
+        $tw.rootWidget.removeEventListener('tw-excalidraw-search', handler);
+      }
+      // If we are on a version prior to that, there is no need to do anything
+      // Old event listeners are overridden when a new one is registered
     };
   }, [excalidrawAPI]);
 
