@@ -189,9 +189,6 @@ export function App(props: IProps & IDefaultWidgetProps) {
         props.parentWidget?.dispatchEvent({
           type: 'tm-modal',
           param: '$:/plugins/itw/tw-excalidraw/ui/import-modal',
-          paramObject: {
-            tiddler,
-          },
         });
       }
     }
