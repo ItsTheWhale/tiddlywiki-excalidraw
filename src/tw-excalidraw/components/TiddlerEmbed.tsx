@@ -11,6 +11,8 @@ export function TiddlerEmbed({ title }: { title: string }): JSX.Element {
         paddingLeft: '1em',
         paddingRight: '1em',
       }}
+
+      onKeyDownCapture={(event) => {event.stopPropagation()}}
     >
       <Transclude title={title} />
     </div>
