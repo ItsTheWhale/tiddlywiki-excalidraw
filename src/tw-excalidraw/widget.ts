@@ -145,7 +145,7 @@ class ExcalidrawWidget extends Widget<IProps> {
       !changedTiddlers['$:/palette'] &&
       // No configuration was changed
       !Object.keys(changedTiddlers).find((title) => title.startsWith('$:/config/itw/tw-excalidraw/'))
-    ) return false;
+    ) return this.refreshChildren(changedTiddlers);
 
     this.refreshSelf();
 
