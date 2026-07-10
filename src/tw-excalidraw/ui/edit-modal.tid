@@ -2,6 +2,16 @@ title: $:/plugins/itw/tw-excalidraw/ui/edit-modal
 subtitle: <<tiddler>>
 footer: {{$:/plugins/itw/tw-excalidraw/ui/edit-modal-footer}}
 
+\procedure closeActionWidgets()
+<$action-sendmessage $message="tm-cancel-tiddler" $param=<<tiddler>> suppressNavigation="yes" />
+<$action-sendmessage $message="tm-close-tiddler" />
+\end
+
+\procedure saveActionWidgets()
+<$action-sendmessage $message="tm-save-tiddler" $param=<<tiddler>> suppressNavigation="yes" />
+<$action-sendmessage $message="tm-close-tiddler" />
+\end
+
 <$tiddler tiddler=<<tiddler>>>
 <$fieldmangler>
 <$let
@@ -16,6 +26,9 @@ footer: {{$:/plugins/itw/tw-excalidraw/ui/edit-modal-footer}}
 	typeInputTiddler=<<qualify "$:/temp/Type/input">>
 	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
 
+<$keyboard key="((cancel-edit-tiddler))" actions=<<closeActionWidgets>> tag="div">
+<$keyboard key="((save-tiddler))" actions=<<saveActionWidgets>> tag="div">
+
   {{||$:/core/ui/EditTemplate/tags}}
 
   <div class="tc-edit-max-width"><$edit-text /></div>
@@ -23,6 +36,9 @@ footer: {{$:/plugins/itw/tw-excalidraw/ui/edit-modal-footer}}
   {{||$:/core/ui/EditTemplate/type}}
 
   {{||$:/core/ui/EditTemplate/fields}}
+
+</$keyboard>
+</$keyboard>
 
 </$let>
 </$fieldmangler>
