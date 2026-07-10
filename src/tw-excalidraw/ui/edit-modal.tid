@@ -2,6 +2,24 @@ title: $:/plugins/itw/tw-excalidraw/ui/edit-modal
 subtitle: <<tiddler>>
 footer: {{$:/plugins/itw/tw-excalidraw/ui/edit-modal-footer}}
 
-<div class="tc-edit-max-width">
-  <$edit-text tiddler=<<tiddler>> />
-</div>
+<$tiddler tiddler=<<tiddler>>>
+<$fieldmangler>
+<$let
+  storyTiddler=<<currentTiddler>>
+	newTagNameTiddler=<<qualify "$:/temp/NewTagName">>
+	newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">>
+	newFieldValueTiddlerPrefix=<<qualify "$:/temp/NewFieldValue">>
+	newFieldNameInputTiddler=<<qualify "$:/temp/NewFieldName/input">>
+	newFieldNameSelectionTiddler=<<qualify "$:/temp/NewFieldName/selected-item">>
+	newTagNameInputTiddler=<<qualify "$:/temp/NewTagName/input">>
+	newTagNameSelectionTiddler=<<qualify "$:/temp/NewTagName/selected-item">>
+	typeInputTiddler=<<qualify "$:/temp/Type/input">>
+	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
+
+  <div class="tc-edit-max-width"><$edit-text /></div>
+
+  {{||$:/core/ui/EditTemplate/fields}}
+
+</$let>
+</$fieldmangler>
+</$tiddler>
