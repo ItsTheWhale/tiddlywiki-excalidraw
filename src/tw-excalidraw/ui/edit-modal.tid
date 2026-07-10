@@ -18,6 +18,8 @@ footer: {{$:/plugins/itw/tw-excalidraw/ui/edit-modal-footer}}
 
   <div class="tc-edit-max-width"><$edit-text /></div>
 
+  {{||$:/core/ui/EditTemplate/type}}
+
   {{||$:/core/ui/EditTemplate/fields}}
 
 </$let>
