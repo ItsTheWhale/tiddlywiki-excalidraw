@@ -16,6 +16,8 @@ footer: {{$:/plugins/itw/tw-excalidraw/ui/edit-modal-footer}}
 	typeInputTiddler=<<qualify "$:/temp/Type/input">>
 	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
 
+  {{||$:/core/ui/EditTemplate/tags}}
+
   <div class="tc-edit-max-width"><$edit-text /></div>
 
   {{||$:/core/ui/EditTemplate/type}}
