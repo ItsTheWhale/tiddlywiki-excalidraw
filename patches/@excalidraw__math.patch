@@ -1,0 +1,16 @@
+diff --git a/package.json b/package.json
+index 011d72dd1de68b0bbfaca663c2a35831bbdbb7e4..bf4970d05bb434b40729421f4b54ab87618835ce 100644
+--- a/package.json
++++ b/package.json
+@@ -13,7 +13,10 @@
+       "default": "./dist/prod/index.js"
+     },
+     "./*": {
+-      "types": "./dist/types/math/src/*.d.ts"
++      "types": "./dist/types/math/src/*.d.ts",
++      "development": "./dist/dev/index.js",
++      "production": "./dist/prod/index.js",
++      "default": "./dist/prod/index.js"
+     }
+   },
+   "files": [

@@ -1,12 +1,16 @@
 import type { IDefaultWidgetProps } from '$:/plugins/linonetwo/tw-react/index.js';
 import { ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 
+import { getElementAbsoluteCoords } from '@excalidraw/element';
 import type { ExcalidrawElement, ExcalidrawEmbeddableElement, NonDeleted, OrderedExcalidrawElement } from '@excalidraw/element/dist/types/element/src/types';
-import { Excalidraw, Footer, MainMenu, restoreElements, serializeAsJSON, viewportCoordsToSceneCoords } from '@excalidraw/excalidraw';
+
+import { Excalidraw, Footer, MainMenu, restoreElements, sceneCoordsToViewportCoords, serializeAsJSON, viewportCoordsToSceneCoords } from '@excalidraw/excalidraw';
+import type { ElementsMap } from '@excalidraw/excalidraw/dist/types/excalidraw/element/types';
 import type { AppState, BinaryFiles, ExcalidrawImperativeAPI, ExcalidrawInitialDataState } from '@excalidraw/excalidraw/dist/types/excalidraw/types';
 
 import '@excalidraw/excalidraw/index.css';
 
+import feather from 'feather-icons';
 import { PositionObserver } from 'position-observer';
 
 import type { Tiddler } from 'tiddlywiki';
@@ -15,6 +19,7 @@ import type { JSX } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import { yesOrNo } from '../utils/yes-or-no.js';
+
 import { MainMenuItemEmbedTiddler } from './MainMenuItemEmbedTiddler.js';
 import { MainMenuItemEnterLayout } from './MainMenuItemEnterLayout.js';
 import { MainMenuItemExitLayout } from './MainMenuItemExitLayout.js';
@@ -66,6 +71,8 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
   const [isReady, setIsReady] = useState<boolean>(false);
+
+  const embeddableEditButtons = useRef<Map<string, HTMLImageElement>>(new Map());
 
   function insertTiddlerEmbed(title: string, x: number, y: number): void {
     if (!excalidrawAPI) return;
@@ -150,6 +157,31 @@ export function App(props: IProps & IDefaultWidgetProps) {
     };
   }, [containerElementReference, excalidrawAPI]);
 
+  function createDraft(title: string): Tiddler {
+    const existingDraftTitle = $tw.wiki.findDraft(title);
+    if (existingDraftTitle) {
+      return $tw.wiki.getTiddler(existingDraftTitle) as Tiddler;
+    }
+
+    const tiddler = $tw.wiki.getTiddler(title);
+
+    const draftTitle = $tw.wiki.generateDraftTitle(title);
+
+    const draftTiddler = new $tw.Tiddler(
+      { text: '' },
+      tiddler as Tiddler,
+      {
+        title: draftTitle,
+        'draft.title': title,
+        'draft.of': title,
+      },
+      $tw.wiki.getModificationFields(),
+    );
+
+    $tw.wiki.addTiddler(draftTiddler);
+    return draftTiddler;
+  }
+
   function handleChange(
     excalidrawElements: readonly OrderedExcalidrawElement[],
     appState: AppState,
@@ -164,6 +196,86 @@ export function App(props: IProps & IDefaultWidgetProps) {
           fitToContent: true,
           animate: false,
         });
+      }
+    }
+
+    if (excalidrawAPI) {
+      // Construct elements map
+      // I do not know of a better way to do this
+      const elementsMap: ElementsMap = new Map();
+      excalidrawAPI.getSceneElements().forEach((element) => {
+        elementsMap.set(element.id, element);
+      });
+
+      // Delete buttons for embeds that no longer exist
+      embeddableEditButtons.current.forEach((_, id) => {
+        if (excalidrawAPI.getSceneElements().find(element => element.id === id)) return;
+
+        embeddableEditButtons.current.delete(id);
+      });
+
+      // For every embedded tiddler, render an edit button
+      for (const element of excalidrawAPI.getSceneElements()) {
+        const title = matchTiddlerTransclusion(element.link ?? '');
+
+        if (element.type === 'embeddable' && element.link && title) {
+          let editButton = embeddableEditButtons.current.get(element.id);
+
+          const COMMENT_ICON_DIMENSION = 12;
+
+          if (!editButton) {
+            editButton = document.createElement('img');
+
+            editButton.width = COMMENT_ICON_DIMENSION;
+            editButton.height = COMMENT_ICON_DIMENSION;
+
+            editButton.draggable = false;
+
+            editButton.style.zIndex = '9';
+            editButton.style.cursor = 'pointer';
+            editButton.style.position = 'absolute';
+
+            editButton.src = `data:image/svg+xml,${
+              encodeURIComponent(feather.icons.edit.toSvg({
+                stroke: '#1971c2',
+              }))
+            }`;
+
+            editButton.addEventListener('click', () => {
+              const draftTiddler = createDraft(title);
+
+              props.parentWidget?.dispatchEvent({
+                type: 'tm-modal',
+                param: '$:/plugins/itw/tw-excalidraw/ui/edit-modal',
+                paramObject: {
+                  tiddler: draftTiddler.fields.title,
+                },
+              });
+            });
+
+            document.querySelector('.excalidraw')?.appendChild(editButton);
+          }
+
+          const zoom = appState.zoom.value;
+          const scaledIconDimension = COMMENT_ICON_DIMENSION / zoom;
+          const centeringOffset = (COMMENT_ICON_DIMENSION - 8) / (2 * zoom);
+          const dashedLineMargin = 4 / zoom;
+
+          const [_x1, y1, x2, _y2] = getElementAbsoluteCoords(element, elementsMap);
+
+          const sceneX = x2 + dashedLineMargin - centeringOffset + (dashedLineMargin + scaledIconDimension);
+          const sceneY = y1 - dashedLineMargin - scaledIconDimension + centeringOffset;
+
+          const { x, y } = sceneCoordsToViewportCoords(
+            { sceneX, sceneY },
+            appState,
+          );
+
+          editButton.style.left = `${x - appState!.offsetLeft}px`;
+          editButton.style.top = `${y - appState!.offsetTop}px`;
+
+          embeddableEditButtons.current.set(element.id, editButton);
+        }
       }
     }
 

@@ -1,5 +1,6 @@
 allowBuilds:
   '@parcel/watcher': false
+  core-js: false
   dprint: false
   esbuild: false
   svelte-preprocess: false
@@ -13,3 +14,4 @@ onlyBuiltDependencies:
 
 patchedDependencies:
   '@excalidraw/excalidraw': patches/@excalidraw__excalidraw.patch
+  '@excalidraw/math': patches/@excalidraw__math.patch

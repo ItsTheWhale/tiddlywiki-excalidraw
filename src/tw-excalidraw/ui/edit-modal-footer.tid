@@ -1,0 +1,14 @@
+title: $:/plugins/itw/tw-excalidraw/ui/edit-modal-footer
+
+\procedure closeActionWidgets()
+<$action-sendmessage $message="tm-cancel-tiddler" $param=<<tiddler>> suppressNavigation="yes" />
+<$action-sendmessage $message="tm-close-tiddler" />
+\end
+
+\procedure saveActionWidgets()
+<$action-sendmessage $message="tm-save-tiddler" $param=<<tiddler>> suppressNavigation="yes" />
+<$action-sendmessage $message="tm-close-tiddler" />
+\end
+
+<$button actions=<<closeActionWidgets>>><<lingo Buttons/Close/Caption>></$button>
+<$button actions=<<saveActionWidgets>>><<lingo Buttons/Save/Caption>></$button>

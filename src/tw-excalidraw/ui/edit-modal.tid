@@ -1,0 +1,7 @@
+title: $:/plugins/itw/tw-excalidraw/ui/edit-modal
+subtitle: <<tiddler>>
+footer: {{$:/plugins/itw/tw-excalidraw/ui/edit-modal-footer}}
+
+<div class="tc-edit-max-width">
+  <$edit-text tiddler=<<tiddler>> />
+</div>
