@@ -203,7 +203,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
       button.draggable = false;
 
-      button.style.zIndex = '9';
+      button.style.zIndex = '4';
       button.style.cursor = 'pointer';
       button.style.position = 'absolute';
 
