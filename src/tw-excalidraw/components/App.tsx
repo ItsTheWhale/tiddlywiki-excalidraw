@@ -182,6 +182,60 @@ export function App(props: IProps & IDefaultWidgetProps) {
     return draftTiddler;
   }
 
+  function drawEmbeddableButton(
+    element: ExcalidrawElement,
+    dimension: number,
+    iconSrc: string,
+    margin: number,
+    buttons: Map<string, HTMLImageElement>,
+    elementsMap: ElementsMap,
+    appState: AppState,
+    onCreation: (button: HTMLImageElement) => void,
+  ): HTMLImageElement {
+    let button = buttons.get(element.id);
+
+    if (!button) {
+      button = document.createElement('img');
+
+      button.width = dimension;
+      button.height = dimension;
+
+      button.draggable = false;
+
+      button.style.zIndex = '9';
+      button.style.cursor = 'pointer';
+      button.style.position = 'absolute';
+
+      button.src = iconSrc;
+
+      document.querySelector('.excalidraw')?.appendChild(button);
+
+      onCreation(button);
+    }
+
+    const zoom = appState.zoom.value;
+    const scaledIconDimension = dimension / zoom;
+    const centeringOffset = (dimension - 8) / (2 * zoom);
+    const dashedLineMargin = 4 / zoom;
+
+    const [_x1, y1, x2, _y2] = getElementAbsoluteCoords(element, elementsMap);
+
+    const sceneX = x2 + dashedLineMargin - centeringOffset + margin * (scaledIconDimension + dashedLineMargin);
+    const sceneY = y1 - dashedLineMargin - scaledIconDimension + centeringOffset;
+
+    const { x, y } = sceneCoordsToViewportCoords(
+      { sceneX, sceneY },
+      appState,
+    );
+
+    button.style.left = `${x - appState!.offsetLeft}px`;
+    button.style.top = `${y - appState!.offsetTop}px`;
+
+    buttons.set(element.id, button);
+
+    return button;
+  }
+
   function handleChange(
     excalidrawElements: readonly OrderedExcalidrawElement[],
     appState: AppState,
@@ -214,34 +268,21 @@ export function App(props: IProps & IDefaultWidgetProps) {
         embeddableEditButtons.current.delete(id);
       });
 
+      const BUTTON_DIMENSION = 12;
+
+      const editButtonIcon = `data:image/svg+xml,${
+        encodeURIComponent(feather.icons.edit.toSvg({
+          stroke: '#1971c2',
+        }))
+      }`;
+
       // For every embedded tiddler, render an edit button
       for (const element of excalidrawAPI.getSceneElements()) {
         const title = matchTiddlerTransclusion(element.link ?? '');
 
         if (element.type === 'embeddable' && element.link && title) {
-          let editButton = embeddableEditButtons.current.get(element.id);
-
-          const COMMENT_ICON_DIMENSION = 12;
-
-          if (!editButton) {
-            editButton = document.createElement('img');
-
-            editButton.width = COMMENT_ICON_DIMENSION;
-            editButton.height = COMMENT_ICON_DIMENSION;
-
-            editButton.draggable = false;
-
-            editButton.style.zIndex = '9';
-            editButton.style.cursor = 'pointer';
-            editButton.style.position = 'absolute';
-
-            editButton.src = `data:image/svg+xml,${
-              encodeURIComponent(feather.icons.edit.toSvg({
-                stroke: '#1971c2',
-              }))
-            }`;
-
-            editButton.addEventListener('click', () => {
+          drawEmbeddableButton(element, BUTTON_DIMENSION, editButtonIcon, 1, embeddableEditButtons.current, elementsMap, appState, (button) => {
+            button.addEventListener('click', () => {
               const draftTiddler = createDraft(title);
 
               props.parentWidget?.dispatchEvent({
@@ -252,29 +293,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
                 },
               });
             });
-
-            document.querySelector('.excalidraw')?.appendChild(editButton);
-          }
-
-          const zoom = appState.zoom.value;
-          const scaledIconDimension = COMMENT_ICON_DIMENSION / zoom;
-          const centeringOffset = (COMMENT_ICON_DIMENSION - 8) / (2 * zoom);
-          const dashedLineMargin = 4 / zoom;
-
-          const [_x1, y1, x2, _y2] = getElementAbsoluteCoords(element, elementsMap);
-
-          const sceneX = x2 + dashedLineMargin - centeringOffset + (dashedLineMargin + scaledIconDimension);
-          const sceneY = y1 - dashedLineMargin - scaledIconDimension + centeringOffset;
-
-          const { x, y } = sceneCoordsToViewportCoords(
-            { sceneX, sceneY },
-            appState,
-          );
-
-          editButton.style.left = `${x - appState!.offsetLeft}px`;
-          editButton.style.top = `${y - appState!.offsetTop}px`;
-
-          embeddableEditButtons.current.set(element.id, editButton);
+          });
         }
       }
     }
