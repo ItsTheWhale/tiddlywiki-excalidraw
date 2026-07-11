@@ -72,6 +72,7 @@ export function App(props: IProps & IDefaultWidgetProps) {
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
   const [isReady, setIsReady] = useState<boolean>(false);
 
+  const embeddablePreviewButtons = useRef<Map<string, HTMLImageElement>>(new Map());
   const embeddableEditButtons = useRef<Map<string, HTMLImageElement>>(new Map());
 
   function insertTiddlerEmbed(title: string, x: number, y: number): void {
@@ -270,6 +271,12 @@ export function App(props: IProps & IDefaultWidgetProps) {
 
       const BUTTON_DIMENSION = 12;
 
+      const previewButtonIcon = `data:image/svg+xml,${
+        encodeURIComponent(feather.icons.eye.toSvg({
+          stroke: '#1971c2',
+        }))
+      }`;
+
       const editButtonIcon = `data:image/svg+xml,${
         encodeURIComponent(feather.icons.edit.toSvg({
           stroke: '#1971c2',
@@ -281,7 +288,19 @@ export function App(props: IProps & IDefaultWidgetProps) {
         const title = matchTiddlerTransclusion(element.link ?? '');
 
         if (element.type === 'embeddable' && element.link && title) {
-          drawEmbeddableButton(element, BUTTON_DIMENSION, editButtonIcon, 1, embeddableEditButtons.current, elementsMap, appState, (button) => {
+          drawEmbeddableButton(element, BUTTON_DIMENSION, previewButtonIcon, 1, embeddablePreviewButtons.current, elementsMap, appState, (button) => {
+            button.addEventListener('click', () => {
+              props.parentWidget?.dispatchEvent({
+                type: 'tm-modal',
+                param: '$:/plugins/itw/tw-excalidraw/ui/preview-modal',
+                paramObject: {
+                  tiddler: title,
+                },
+              });
+            });
+          });
+
+          drawEmbeddableButton(element, BUTTON_DIMENSION, editButtonIcon, 2, embeddableEditButtons.current, elementsMap, appState, (button) => {
             button.addEventListener('click', () => {
               const draftTiddler = createDraft(title);
 

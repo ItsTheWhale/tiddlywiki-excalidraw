@@ -1,0 +1,6 @@
+title: $:/plugins/itw/tw-excalidraw/ui/preview-modal
+subtitle: <<tiddler>>
+
+<!-- Wrapper to prevent the transcluded tiddler from messing with the modal machinery -->
+
+<$transclude $tiddler=<<tiddler>> />
