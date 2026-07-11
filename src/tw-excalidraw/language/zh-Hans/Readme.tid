@@ -44,6 +44,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hans/Readme
 把条目拖曳并放置在此组件上会把条目嵌入画布内。不已存在的条目会被导入。
 
 
+!! 侧栏
+
+用 `$:/tags/tw-excalidraw/Sidebar` 标签标定想设为侧栏页签的条目。条目的 `caption` 栏位将在页签转换按钮中显示。
+
+
 !! 组件
 
 此插件提供 `<$excalidraw />` 组件以显示白板。

@@ -44,6 +44,11 @@ Set the link of a Excalidraw web embed element to the tiddler title enclosed in 
 Dragging tiddlers into the widget will insert them into the canvas as embeds. If the tiddler does not already exist, it will be imported into the wiki.
 
 
+!! Sidebar
+
+Tag a tiddler with `$:/tags/tw-excalidraw/Sidebar` to add it to the sidebar. The trigger button can be configured with the `caption` field.
+
+
 !! Widget
 
 This plugin provides the `<$excalidraw />` widget to display a whiteboard.

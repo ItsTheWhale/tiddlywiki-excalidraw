@@ -44,6 +44,11 @@ title: $:/plugins/itw/tw-excalidraw/language/zh-Hant/Readme
 把條目拖曳並放置在此組件上會把條目嵌入畫布內。不已存在的條目會被導入。
 
 
+!! 側欄
+
+用 `$:/tags/tw-excalidraw/Sidebar` 標籤標定想設爲側欄頁籤的條目。條目的 `caption` 欄位將在頁籤轉換按鈕中顯示。
+
+
 !! 組件
 
 此插件提供 `<$excalidraw />` 組件以顯示白板。
