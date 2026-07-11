@@ -237,6 +237,13 @@ export function App(props: IProps & IDefaultWidgetProps) {
     return button;
   }
 
+  function clearEmbeddableButtons(buttons: Map<string, HTMLImageElement>): void {
+    buttons.forEach((button, id) => {
+      button.remove();
+      buttons.delete(id);
+    });
+  }
+
   function handleChange(
     excalidrawElements: readonly OrderedExcalidrawElement[],
     appState: AppState,
@@ -300,19 +307,21 @@ export function App(props: IProps & IDefaultWidgetProps) {
             });
           });
 
-          drawEmbeddableButton(element, BUTTON_DIMENSION, editButtonIcon, 2, embeddableEditButtons.current, elementsMap, appState, (button) => {
-            button.addEventListener('click', () => {
-              const draftTiddler = createDraft(title);
+          if (!appState.viewModeEnabled) {
+            drawEmbeddableButton(element, BUTTON_DIMENSION, editButtonIcon, 2, embeddableEditButtons.current, elementsMap, appState, (button) => {
+              button.addEventListener('click', () => {
+                const draftTiddler = createDraft(title);
 
-              props.parentWidget?.dispatchEvent({
-                type: 'tm-modal',
-                param: '$:/plugins/itw/tw-excalidraw/ui/edit-modal',
-                paramObject: {
-                  tiddler: draftTiddler.fields.title,
-                },
+                props.parentWidget?.dispatchEvent({
+                  type: 'tm-modal',
+                  param: '$:/plugins/itw/tw-excalidraw/ui/edit-modal',
+                  paramObject: {
+                    tiddler: draftTiddler.fields.title,
+                  },
+                });
               });
             });
-          });
+          } else clearEmbeddableButtons(embeddableEditButtons.current);
         }
       }
     }
