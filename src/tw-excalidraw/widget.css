@@ -1,7 +1,7 @@
 /* Excalidraw style modifications */
 
 .dropdown-menu-container {
-  height: calc(var(--tw-excalidraw-height) - 100px)
+  max-height: calc(var(--tw-excalidraw-height) - 100px) !important;
 }
 
 /* Default Excalidraw styles */
